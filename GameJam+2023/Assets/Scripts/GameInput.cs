@@ -34,4 +34,19 @@ public class GameInput : MonoBehaviour
         inputVector = inputVector.normalized;
         return inputVector;
     }
+
+    public Vector2 GetMousePosition()
+    {
+        return Mouse.current.position.ReadValue();
+    }
+
+    public bool IsOnMouseLeftBeingPressed()
+    {
+        return Mouse.current.leftButton.isPressed;
+    }
+
+    public bool IsOnMouseLeftUp()
+    {
+        return Mouse.current.leftButton.wasReleasedThisFrame;
+    }
 }

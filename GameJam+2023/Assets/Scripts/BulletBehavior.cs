@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletBehavior : MonoBehaviour
 {
-    [SerializeField] private float bulletSpeed = 15f;
+    [SerializeField] private float moveSpeed = 15f;
 
     private Rigidbody2D rb;
 
@@ -18,8 +18,9 @@ public class BulletBehavior : MonoBehaviour
         SetVelocity();
     }
 
-    private void SetVelocity()
+    public void SetVelocity()
     {
-        rb.velocity = transform.right * bulletSpeed;
+        rb.velocity = transform.right * moveSpeed;
+
     }
 }
