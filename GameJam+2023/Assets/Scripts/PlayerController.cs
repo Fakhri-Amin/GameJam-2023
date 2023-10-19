@@ -12,9 +12,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 moveInput = GameInput.Instance.GetMovementVectorNormalized();
-
-        if (moveInput != Vector2.zero && !isMoving) StartCoroutine(Move(moveInput));
+        if (BattleSystem.Instance.IsPlayerTurn())
+        {
+            Vector2 moveInput = GameInput.Instance.GetMovementVectorNormalized();
+            if (moveInput != Vector2.zero && !isMoving) StartCoroutine(Move(moveInput));
+        }
     }
 
     private IEnumerator Move(Vector2 direction)
@@ -24,6 +26,11 @@ public class PlayerController : MonoBehaviour
         float elapsedTime = 0f;
         originalPosition = transform.position;
         targetPosition = originalPosition + direction;
+
+        // Limit the player position
+        int minYposition = 0;
+        int maxYPosition = 7;
+        targetPosition.y = Mathf.Clamp(targetPosition.y, minYposition, maxYPosition);
 
         while (elapsedTime < timeToMove)
         {
