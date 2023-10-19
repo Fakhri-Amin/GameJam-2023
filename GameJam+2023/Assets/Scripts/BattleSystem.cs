@@ -52,11 +52,4 @@ public class BattleSystem : MonoBehaviour
     {
         return state == State.UnitTurn;
     }
-
-    public void SetStateTo(State state)
-    {
-        this.state = state;
-    }
-
-
 }

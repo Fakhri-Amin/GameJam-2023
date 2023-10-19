@@ -18,7 +18,11 @@ public class BulletCollisionHandler : MonoBehaviour
         if (other.gameObject.TryGetComponent<IDamageable>(out IDamageable damageable))
         {
             damageable.Damage(damageAmount);
-            // bulletBehavior.BounceBall(other);
+        }
+
+        if (other.gameObject.GetComponent<BulletDestroyCollider>())
+        {
+            gameObject.SetActive(false);
         }
     }
 }

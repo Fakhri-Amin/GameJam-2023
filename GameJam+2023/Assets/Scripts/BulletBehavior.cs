@@ -13,7 +13,7 @@ public class BulletBehavior : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
         SetVelocity();
     }
@@ -21,6 +21,5 @@ public class BulletBehavior : MonoBehaviour
     public void SetVelocity()
     {
         rb.velocity = transform.right * moveSpeed;
-
     }
 }

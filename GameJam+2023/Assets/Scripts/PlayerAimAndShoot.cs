@@ -76,7 +76,15 @@ public class PlayerAimAndShoot : MonoBehaviour
     {
         for (int i = 0; i < bulletCount; i++)
         {
-            Instantiate(bulletPrefab, bulletSpawnPoint.position, transform.rotation);
+            // Instantiate(bulletPrefab, bulletSpawnPoint.position, transform.rotation);
+            GameObject bullet = ObjectPool.Instance.GetPooledObject();
+
+            if (bullet != null)
+            {
+                bullet.transform.position = bulletSpawnPoint.position;
+                bullet.SetActive(true);
+            }
+
             yield return new WaitForSeconds(timeBetweenShot);
         }
         onActionComplete();
