@@ -13,6 +13,7 @@ public class BattleSystem : MonoBehaviour
     public enum State
     {
         PlayerTurn,
+        Waiting,
         UnitTurn
     }
 
@@ -33,6 +34,9 @@ public class BattleSystem : MonoBehaviour
         switch (state)
         {
             case State.PlayerTurn:
+                OnStateChanged?.Invoke(() => { state = State.Waiting; });
+                break;
+            case State.Waiting:
                 OnStateChanged?.Invoke(() => { state = State.UnitTurn; });
                 break;
             case State.UnitTurn:
@@ -51,5 +55,10 @@ public class BattleSystem : MonoBehaviour
     public bool IsUnitTurn()
     {
         return state == State.UnitTurn;
+    }
+
+    public bool IsWaiting()
+    {
+        return state == State.Waiting;
     }
 }

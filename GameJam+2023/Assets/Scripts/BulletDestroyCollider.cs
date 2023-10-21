@@ -1,33 +1,34 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BulletDestroyCollider : MonoBehaviour
 {
-    // private EdgeCollider2D edgeCollider2D;
+    [SerializeField] private PlayerAimAndShoot player;
 
-    // private void Awake()
-    // {
-    //     edgeCollider2D = GetComponent<EdgeCollider2D>();
-    // }
+    private int bulletCount;
 
-    // private void Start()
-    // {
-    //     BattleSystem.Instance.OnStateChanged += BattleSystem_OnStateChanged;
-    //     edgeCollider2D.enabled = false;
-    // }
+    private void Start()
+    {
+        BattleSystem.Instance.OnStateChanged += BattleSystem_OnStateChanged;
+    }
 
-    // private void BattleSystem_OnStateChanged(Action onActionComplete)
-    // {
-    //     if (BattleSystem.Instance.IsWaiting() && ObjectPool.Instance.IsBulletActiveInHieararchy())
-    //     {
-    //         edgeCollider2D.enabled = true;
-    //     }
-    //     else
-    //     {
-    //         edgeCollider2D.enabled = false;
-    //         // onActionComplete();
-    //     }
-    // }
+    private void BattleSystem_OnStateChanged(Action onCompleteAction)
+    {
+        if (BattleSystem.Instance.IsWaiting())
+        {
+            if (bulletCount == player.GetBulletCount())
+            {
+                onCompleteAction();
+                bulletCount = 0;
+            }
+        }
+    }
+
+    public void IncrementBulletCount()
+    {
+        bulletCount++;
+    }
 }

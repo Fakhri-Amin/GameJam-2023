@@ -37,7 +37,8 @@ public class PlayerAimAndShoot : MonoBehaviour
             // Handle Shooting
             if (GameInput.Instance.IsOnMouseLeftUp())
             {
-                StartCoroutine(Shoot(() => { onActionComplete(); }));
+                onActionComplete();
+                StartCoroutine(Shoot());
             }
         }
     }
@@ -72,7 +73,7 @@ public class PlayerAimAndShoot : MonoBehaviour
         }
     }
 
-    private IEnumerator Shoot(Action onActionComplete)
+    private IEnumerator Shoot()
     {
         for (int i = 0; i < bulletCount; i++)
         {
@@ -87,6 +88,10 @@ public class PlayerAimAndShoot : MonoBehaviour
 
             yield return new WaitForSeconds(timeBetweenShot);
         }
-        onActionComplete();
+    }
+
+    public int GetBulletCount()
+    {
+        return bulletCount;
     }
 }
