@@ -25,21 +25,18 @@ public class PlayerAimAndShoot : MonoBehaviour
 
     private void Start()
     {
-        BattleSystem.Instance.OnStateChanged += BattleSystem_OnStateChanged;
+        BattleSystem.Instance.OnPlayerTurn += BattleSystem_OnPlayerTurn;
     }
 
-    private void BattleSystem_OnStateChanged(Action onActionComplete)
+    private void BattleSystem_OnPlayerTurn(Action onActionComplete)
     {
-        if (BattleSystem.Instance.IsPlayerTurn())
-        {
-            HandleRotation();
+        HandleRotation();
 
-            // Handle Shooting
-            if (GameInput.Instance.IsOnMouseLeftUp())
-            {
-                onActionComplete();
-                StartCoroutine(Shoot());
-            }
+        // Handle Shooting
+        if (GameInput.Instance.IsOnMouseLeftUp())
+        {
+            onActionComplete();
+            StartCoroutine(Shoot());
         }
     }
 

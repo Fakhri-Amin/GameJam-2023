@@ -12,18 +12,15 @@ public class BulletDestroyCollider : MonoBehaviour
 
     private void Start()
     {
-        BattleSystem.Instance.OnStateChanged += BattleSystem_OnStateChanged;
+        BattleSystem.Instance.OnWaiting += BattleSystem_OnWaiting;
     }
 
-    private void BattleSystem_OnStateChanged(Action onCompleteAction)
+    private void BattleSystem_OnWaiting(Action onCompleteAction)
     {
-        if (BattleSystem.Instance.IsWaiting())
+        if (bulletCount == player.GetBulletCount())
         {
-            if (bulletCount == player.GetBulletCount())
-            {
-                onCompleteAction();
-                bulletCount = 0;
-            }
+            onCompleteAction();
+            bulletCount = 0;
         }
     }
 

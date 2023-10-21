@@ -20,19 +20,16 @@ public class UnitBattleHandler : MonoBehaviour
 
     private void Start()
     {
-        BattleSystem.Instance.OnStateChanged += BattleSystem_OnStateChanged;
+        BattleSystem.Instance.OnUnitTurn += BattleSystem_OnUnitTurn;
     }
 
-    private void BattleSystem_OnStateChanged(Action onActionComplete)
+    private void BattleSystem_OnUnitTurn(Action onActionComplete)
     {
-        if (BattleSystem.Instance.IsUnitTurn())
+        foreach (UnitBase unitBase in unitList)
         {
-            foreach (UnitBase unitBase in unitList)
-            {
-                StartCoroutine(unitBase.Move(Vector2.left));
-            }
-            onActionComplete();
+            StartCoroutine(unitBase.Move(Vector2.left));
         }
+        onActionComplete();
     }
 
     public void RemoveUnitFromUnitList(UnitBase unitBase)

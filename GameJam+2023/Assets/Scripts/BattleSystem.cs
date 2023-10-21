@@ -6,7 +6,9 @@ using UnityEngine;
 
 public class BattleSystem : MonoBehaviour
 {
-    public event Action<Action> OnStateChanged;
+    public event Action<Action> OnPlayerTurn;
+    public event Action<Action> OnWaiting;
+    public event Action<Action> OnUnitTurn;
 
     public static BattleSystem Instance;
 
@@ -34,13 +36,13 @@ public class BattleSystem : MonoBehaviour
         switch (state)
         {
             case State.PlayerTurn:
-                OnStateChanged?.Invoke(() => { state = State.Waiting; });
+                OnPlayerTurn?.Invoke(() => { state = State.Waiting; });
                 break;
             case State.Waiting:
-                OnStateChanged?.Invoke(() => { state = State.UnitTurn; });
+                OnWaiting?.Invoke(() => { state = State.UnitTurn; });
                 break;
             case State.UnitTurn:
-                OnStateChanged?.Invoke(() => { state = State.PlayerTurn; });
+                OnUnitTurn?.Invoke(() => { state = State.PlayerTurn; });
                 break;
             default:
                 break;

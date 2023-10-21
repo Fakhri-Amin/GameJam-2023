@@ -7,6 +7,7 @@ using UnityEngine;
 public abstract class UnitBase : MonoBehaviour, IDamageable, IMove, IAttack
 {
     [field: SerializeField] public float MaxHealth { get; set; } = 10f;
+    public event Action OnHealthChanged;
 
 
     public float CurrentHealth { get; set; }
@@ -17,11 +18,14 @@ public abstract class UnitBase : MonoBehaviour, IDamageable, IMove, IAttack
     private void Start()
     {
         CurrentHealth = MaxHealth;
+        OnHealthChanged?.Invoke();
     }
 
     public void Damage(float damageAmount)
     {
         CurrentHealth -= damageAmount;
+
+        OnHealthChanged?.Invoke();
 
         if (CurrentHealth <= 0)
         {
@@ -39,7 +43,7 @@ public abstract class UnitBase : MonoBehaviour, IDamageable, IMove, IAttack
     {
         float elapsedTime = 0f;
         CurrentPosition = transform.position;
-        TargetPosition = CurrentPosition + direction;
+        TargetPosition = direction + CurrentPosition;
 
         while (elapsedTime < TimeToMove)
         {
@@ -49,11 +53,15 @@ public abstract class UnitBase : MonoBehaviour, IDamageable, IMove, IAttack
         }
 
         transform.position = TargetPosition;
-        // onActionComplete();
     }
 
     public virtual void Attack()
     {
 
+    }
+
+    public float GetCurrentHealth()
+    {
+        return CurrentHealth;
     }
 }
