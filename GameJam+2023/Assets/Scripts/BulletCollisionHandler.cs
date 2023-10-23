@@ -16,21 +16,9 @@ public class BulletCollisionHandler : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        // if (!isFirstHit)
-        // {
-        //     isFirstHit = true;
-        //     return;
-        // }
-
         if (other.gameObject.TryGetComponent<IDamageable>(out IDamageable damageable))
         {
             damageable.Damage(damageAmount);
-        }
-
-        if (other.gameObject.TryGetComponent<BulletDestroyCollider>(out BulletDestroyCollider bulletDestroy))
-        {
-            bulletDestroy.IncrementBulletCount();
-            gameObject.SetActive(false);
         }
     }
 }

@@ -64,4 +64,9 @@ public abstract class UnitBase : MonoBehaviour, IDamageable, IMove, IAttack
     {
         return CurrentHealth;
     }
+
+    public Vector2 GetUnitPosition()
+    {
+        return transform.position;
+    }
 }

@@ -9,7 +9,6 @@ public class PlayerAimAndShoot : MonoBehaviour
     [SerializeField] private Transform bulletSpawnPoint;
 
     [Header("Bullet Stats")]
-    [SerializeField] private Transform bulletPrefab;
     [SerializeField] private int bulletCount;
     [SerializeField] private float timeBetweenShot = 0.08f;
 
