@@ -41,6 +41,7 @@ public abstract class UnitBase : MonoBehaviour, IDamageable, IMove, IAttack
 
     public IEnumerator Move(Vector2 direction)
     {
+        EnemySpawnManager.Instance.RemoveUnit(this);
         float elapsedTime = 0f;
         CurrentPosition = transform.position;
         TargetPosition = direction + CurrentPosition;
@@ -53,6 +54,7 @@ public abstract class UnitBase : MonoBehaviour, IDamageable, IMove, IAttack
         }
 
         transform.position = TargetPosition;
+        EnemySpawnManager.Instance.MoveUnit(this);
     }
 
     public virtual void Attack()

@@ -20,6 +20,7 @@ public class UnitBattleHandler : MonoBehaviour
         foreach (UnitBase unitBase in unitList)
         {
             unitPositionList.Add(unitBase.GetUnitPosition());
+            EnemySpawnManager.Instance.MoveUnit(unitBase);
         }
     }
 
@@ -43,5 +44,13 @@ public class UnitBattleHandler : MonoBehaviour
     {
         unitList.Remove(unitBase);
         unitPositionList.Remove(unitBase.GetUnitPosition());
+        EnemySpawnManager.Instance.RemoveUnit(unitBase);
+    }
+
+    public void AddNewUnit()
+    {
+        var newUnit = EnemySpawnManager.Instance.SpawnNewEnemy();
+        unitList.Add(newUnit);
+        unitPositionList.Add(newUnit.GetUnitPosition());
     }
 }
