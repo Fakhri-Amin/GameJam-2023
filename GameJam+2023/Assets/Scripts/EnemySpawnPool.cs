@@ -52,6 +52,7 @@ public class EnemySpawnPool : MonoBehaviour
 
     public GameObject ActivateObject(string id, Transform objTransform, Transform parent = null)
     {
+        RemoveDestroyedObject();
         RuntimeObjectPool pool;
         if (runtimePools.TryGetValue(id, out pool))
         {
@@ -88,6 +89,14 @@ public class EnemySpawnPool : MonoBehaviour
             deactivatedObject.transform.SetParent(transform);
         }
         deactivatedObject.SetActive(false);
+    }
+
+    void RemoveDestroyedObject()
+    {
+        foreach (var pool in runtimePools)
+        {
+            pool.Value.pooledObject.RemoveAll(x => x == null);
+        }
     }
 }
 

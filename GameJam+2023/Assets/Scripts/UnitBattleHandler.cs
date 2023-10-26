@@ -17,15 +17,16 @@ public class UnitBattleHandler : MonoBehaviour
         Instance = this;
 
         unitList = FindObjectsOfType<UnitBase>().ToList();
+        
+    }
+
+    private void Start()
+    {
         foreach (UnitBase unitBase in unitList)
         {
             unitPositionList.Add(unitBase.GetUnitPosition());
             EnemySpawnManager.Instance.MoveUnit(unitBase);
         }
-    }
-
-    private void Start()
-    {
         BattleSystem.Instance.OnUnitTurn += BattleSystem_OnUnitTurn;
     }
 
