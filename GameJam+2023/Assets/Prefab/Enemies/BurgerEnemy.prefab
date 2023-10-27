@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 124087407167114855}
   - component: {fileID: 8415202491321329948}
   - component: {fileID: 5695275225106364820}
-  m_Layer: 0
-  m_Name: Enemy
+  m_Layer: 6
+  m_Name: BurgerEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 2490977847942582323}
   - component: {fileID: 5118866514681236160}
   - component: {fileID: 5426923184079548723}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 938, y: 527.5}
+  m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &2490977847942582323
 Canvas:
@@ -195,7 +195,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7515777926554894054}
   - component: {fileID: 6637597847514608264}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EnemyCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 6800364503509840716}
   - component: {fileID: 6287624668955648063}
   - component: {fileID: 1806590369254500195}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -376,7 +376,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6842525895465153459}
   - component: {fileID: 5572035470715061925}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -459,7 +459,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5696248060596646786}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EnemyVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}

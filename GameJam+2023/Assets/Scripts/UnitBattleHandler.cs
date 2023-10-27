@@ -36,6 +36,7 @@ public class UnitBattleHandler : MonoBehaviour
         {
             unitPositionList.Remove(unitBase.GetUnitPosition());
             StartCoroutine(unitBase.Move(Vector2.left));
+            unitBase.Attack();
             unitPositionList.Add(unitBase.GetUnitPosition());
         }
         onActionComplete();
