@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 124087407167114855}
   - component: {fileID: 8415202491321329948}
   - component: {fileID: 5695275225106364820}
+  - component: {fileID: 7664316359225394300}
   m_Layer: 6
   m_Name: BurgerEnemy
   m_TagString: Untagged
@@ -83,6 +84,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MaxHealth>k__BackingField: 10
+  <CrashDamage>k__BackingField: 10
+--- !u!50 &7664316359225394300
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559091286090423660}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &943532422990537119
 GameObject:
   m_ObjectHideFlags: 0

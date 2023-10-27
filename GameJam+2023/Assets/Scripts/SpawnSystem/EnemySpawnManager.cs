@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySpawnManager : MonoBehaviour
 {
-    public static EnemySpawnManager Instance { get; private set; }
+    public static EnemySpawnManager instance { get; private set; }
     public EnemySpawnPool spawnPool;
     public List<Transform> tilesParentList;
     public TileTransform[,] tileTransform;
@@ -16,13 +16,13 @@ public class EnemySpawnManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        if (instance != null && instance != this)
         {
             Destroy(gameObject);
         }
         else
         {
-            Instance = this;
+            instance = this;
         }
         InstantiateTilesTransform();
     }
@@ -31,12 +31,14 @@ public class EnemySpawnManager : MonoBehaviour
     {
         BattleSystem.Instance.OnPlayerTurn += OnPlayerTurn;
         BattleSystem.Instance.OnUnitTurn += OnUnitTurn;
+        EventManager.onEnemyCrashPlayerEvent += OnEnemyCrashPlayer;
     }
 
     private void OnDestroy()
     {
         BattleSystem.Instance.OnPlayerTurn -= OnPlayerTurn;
         BattleSystem.Instance.OnUnitTurn -= OnUnitTurn;
+        EventManager.onEnemyCrashPlayerEvent -= OnEnemyCrashPlayer;
     }
 
     public void RemoveUnit(UnitBase movedUnit)
@@ -110,6 +112,11 @@ public class EnemySpawnManager : MonoBehaviour
         spawnTag = true;
     }
 
+    void OnEnemyCrashPlayer(UnitBase unit)
+    {
+        RemoveUnit(unit);
+    }
+
     void InstantiateTilesTransform()
     {
         List<float> xPosition = new List<float>();
@@ -150,8 +157,52 @@ public class EnemySpawnManager : MonoBehaviour
                 tileTransform[xValue, yValue] = newTile;
             }
         }
+        var n = xPosition.Count;
+        for (int i = 0; i < n - 1; i++)
+            for (int j = 0; j < n - i - 1; j++)
+                if (xPosition[j] > xPosition[j + 1])
+                {
+                    var tempVar = xPosition[j];
+                    xPosition[j] = xPosition[j + 1];
+                    xPosition[j + 1] = tempVar;
+                    SwapXpos(j, j + 1);
+                }
+        n = yPosition.Count;
+        for (int i = 0; i < n - 1; i++)
+            for (int j = 0; j < n - i - 1; j++)
+                if (yPosition[j] > yPosition[j + 1])
+                {
+                    var tempVar = yPosition[j];
+                    yPosition[j] = yPosition[j + 1];
+                    yPosition[j + 1] = tempVar;
+                    SwapYpos(j, j + 1);
+                }
+        /*for (int i = 0; i < xSize; i++)
+            for (int j = 0; j < ySize; j++)
+            {
+                Debug.Log("jyo" + tileTransform[i, j].XID + " " + tileTransform[i, j].YID + " " + tileTransform[i, j].transform.position);
+            }*/
     }
 
+    void SwapXpos(int xPos1, int xPos2)
+    {
+        for (var i = 0; i < ySize; i++)
+        {
+            var tempVar = tileTransform[xPos1, i].transform;
+            tileTransform[xPos1, i].transform = tileTransform[xPos2, i].transform;
+            tileTransform[xPos2, i].transform = tempVar;
+        }
+    }
+
+    void SwapYpos(int yPos1, int yPos2)
+    {
+        for (var i = 0; i < xSize; i++)
+        {
+            var tempVar = tileTransform[i, yPos1].transform;
+            tileTransform[i, yPos1].transform = tileTransform[i, yPos2].transform;
+            tileTransform[i, yPos2].transform = tempVar;
+        }
+    }
 }
 
 public class TileTransform

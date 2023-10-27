@@ -7,6 +7,7 @@ using UnityEngine;
 public abstract class UnitBase : MonoBehaviour, IDamageable, IMove, IAttack
 {
     [field: SerializeField] public float MaxHealth { get; set; } = 10f;
+    [field: SerializeField] public float CrashDamage { get; set; } = 10f;
     public event Action OnHealthChanged;
 
 
@@ -41,7 +42,7 @@ public abstract class UnitBase : MonoBehaviour, IDamageable, IMove, IAttack
 
     public IEnumerator Move(Vector2 direction)
     {
-        EnemySpawnManager.Instance.RemoveUnit(this);
+        EnemySpawnManager.instance.RemoveUnit(this);
         float elapsedTime = 0f;
         CurrentPosition = transform.position;
         TargetPosition = direction + CurrentPosition;
@@ -54,7 +55,7 @@ public abstract class UnitBase : MonoBehaviour, IDamageable, IMove, IAttack
         }
 
         transform.position = TargetPosition;
-        EnemySpawnManager.Instance.MoveUnit(this);
+        EnemySpawnManager.instance.MoveUnit(this);
     }
 
     public virtual void Attack()
