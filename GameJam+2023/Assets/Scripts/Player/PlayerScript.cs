@@ -7,10 +7,19 @@ public class PlayerScript : MonoBehaviour, IDamageable
     public float maxEnergy = 100f;
 
     [Header("Run Time Game Stats")]
-    public float currentHealth;
-    public float currentEnergy;
+    float currentHealth;
+    float currentEnergy;
 
-    public float CurrentHealth { get; set; }
+    public float CurrentHealth 
+    { 
+        get {return currentHealth; } 
+        set { currentHealth = value; UIManager.instance.playerStats.UpdateHealth(currentHealth, maxHealth); } 
+    }
+    public float CurrentEnergy
+    {
+        get { return currentEnergy; }
+        set { currentEnergy = value; UIManager.instance.playerStats.UpdateEnergy(currentEnergy, maxEnergy); }
+    }
     public float MaxHealth { get; set; }
 
     private void Start()
@@ -30,19 +39,19 @@ public class PlayerScript : MonoBehaviour, IDamageable
 
     void OnLevelStart(int levelID)
     {
-        currentHealth = maxHealth;
-        currentEnergy = maxEnergy;
+        CurrentHealth = maxHealth;
+        CurrentEnergy = maxEnergy;
     }
 
     void OnEnemyAttackPlayer(UnitBase unit)
     {
-        currentHealth -= unit.CrashDamage;
+        CurrentHealth -= unit.CrashDamage;
         EventManager.instance.OnPlayerDamaged();
     }
 
     void OnPlayerDamaged()
     {
-        if (currentHealth <= 0)
+        if (CurrentHealth <= 0)
         {
             Die();
             EventManager.instance.OnPlayerDead();
@@ -51,7 +60,7 @@ public class PlayerScript : MonoBehaviour, IDamageable
 
     public void Damage(float damageAmount)
     {
-        currentHealth -= damageAmount;
+        CurrentHealth -= damageAmount;
         EventManager.instance.OnPlayerDamaged();
     }
 
@@ -59,4 +68,5 @@ public class PlayerScript : MonoBehaviour, IDamageable
     {
         
     }
+
 }
