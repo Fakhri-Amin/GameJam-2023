@@ -21,6 +21,12 @@ public class PlayerAimAndShoot : MonoBehaviour
     private Vector2 direction;
     private RaycastHit2D ray;
     private float angle;
+    private DotsProjectileLine dotsProjectileLine;
+
+    private void Awake()
+    {
+        dotsProjectileLine = GetComponent<DotsProjectileLine>();
+    }
 
     private void Start()
     {
@@ -56,9 +62,12 @@ public class PlayerAimAndShoot : MonoBehaviour
 
             if (angle >= minMaxAngle.x && angle <= minMaxAngle.y)
             {
-                lineRenderer.SetPosition(0, bulletSpawnPoint.position);
-                lineRenderer.SetPosition(1, ray.point);
-                lineRenderer.SetPosition(2, ray.point + reflectPosition.normalized * 2f);
+                // lineRenderer.SetPosition(0, bulletSpawnPoint.position);
+                // lineRenderer.SetPosition(1, ray.point);
+                // lineRenderer.SetPosition(2, ray.point + reflectPosition.normalized * 2f);
+
+                dotsProjectileLine.DrawDottedLine(transform.position, ray.point);
+                dotsProjectileLine.DrawDottedLine(ray.point, ray.point + reflectPosition.normalized * 2f);
             }
 
             transform.rotation = Quaternion.AngleAxis(angle, transform.forward);
