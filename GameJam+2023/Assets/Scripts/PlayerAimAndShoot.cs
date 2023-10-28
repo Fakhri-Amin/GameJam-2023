@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class PlayerAimAndShoot : MonoBehaviour
 {
-    [Header("Gun Stats")]
-    [SerializeField] private Transform bulletSpawnPoint;
+    [SerializeField] private Transform objectRotation;
 
     [Header("Bullet Stats")]
     [SerializeField] private int bulletCount;
@@ -51,11 +50,11 @@ public class PlayerAimAndShoot : MonoBehaviour
         {
             lineRenderer.enabled = true;
 
-            ray = Physics2D.Raycast(bulletSpawnPoint.position, transform.right, 30f, layermask);
+            ray = Physics2D.Raycast(objectRotation.position, objectRotation.transform.right, 30f, layermask);
 
-            Vector2 reflectPosition = Vector2.Reflect(new Vector3(ray.point.x, ray.point.y) - transform.position, ray.normal);
+            Vector2 reflectPosition = Vector2.Reflect(new Vector3(ray.point.x, ray.point.y) - objectRotation.transform.position, ray.normal);
             Vector2 mousePosition = GameInput.Instance.GetMousePosition();
-            gunPosition = Camera.main.WorldToScreenPoint(transform.position);
+            gunPosition = Camera.main.WorldToScreenPoint(objectRotation.transform.position);
             direction = mousePosition - gunPosition;
 
             angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -66,11 +65,11 @@ public class PlayerAimAndShoot : MonoBehaviour
                 // lineRenderer.SetPosition(1, ray.point);
                 // lineRenderer.SetPosition(2, ray.point + reflectPosition.normalized * 2f);
 
-                dotsProjectileLine.DrawDottedLine(transform.position, ray.point);
+                dotsProjectileLine.DrawDottedLine(objectRotation.transform.position, ray.point);
                 dotsProjectileLine.DrawDottedLine(ray.point, ray.point + reflectPosition.normalized * 2f);
             }
 
-            transform.rotation = Quaternion.AngleAxis(angle, transform.forward);
+            objectRotation.transform.rotation = Quaternion.AngleAxis(angle, objectRotation.transform.forward);
         }
         else
         {
@@ -87,7 +86,7 @@ public class PlayerAimAndShoot : MonoBehaviour
 
             if (bullet != null)
             {
-                bullet.transform.position = bulletSpawnPoint.position;
+                bullet.transform.position = objectRotation.position;
                 bullet.SetActive(true);
             }
 

@@ -7,6 +7,7 @@ public class ObjectPool : MonoBehaviour
     public static ObjectPool Instance;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private int poolAmount;
+    [SerializeField] private Transform objectRotation;
 
     private List<GameObject> pooledGameObjectList = new();
 
@@ -22,7 +23,7 @@ public class ObjectPool : MonoBehaviour
         {
             GameObject poolObject = Instantiate(bulletPrefab);
             poolObject.SetActive(false);
-            poolObject.transform.parent = transform;
+            poolObject.transform.parent = objectRotation;
             pooledGameObjectList.Add(poolObject);
         }
     }
