@@ -114,7 +114,7 @@ public class EnemySpawnManager : MonoBehaviour
 
     void OnEnemyCrashPlayer(UnitBase unit)
     {
-        RemoveUnit(unit);
+        unit.Die();
     }
 
     void InstantiateTilesTransform()

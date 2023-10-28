@@ -22,4 +22,9 @@ public class BulletBehavior : MonoBehaviour
     {
         rb.velocity = transform.right * moveSpeed;
     }
+
+    private void Update()
+    {
+        rb.velocity = rb.velocity.normalized * moveSpeed;
+    }
 }

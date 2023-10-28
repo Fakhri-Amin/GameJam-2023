@@ -36,6 +36,7 @@ public abstract class UnitBase : MonoBehaviour, IDamageable, IMove, IAttack
 
     public void Die()
     {
+        EnemySpawnManager.instance.RemoveUnit(this);
         UnitBattleHandler.Instance.RemoveUnitFromUnitList(this);
         Destroy(gameObject);
     }
