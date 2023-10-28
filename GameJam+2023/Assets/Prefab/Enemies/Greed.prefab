@@ -418,7 +418,8 @@ MonoBehaviour:
   <xSize>k__BackingField: 2
   <ySize>k__BackingField: 2
   collider2D: {fileID: 0}
-  ShieldValue: 5
+  shieldID: greedShield
+  shieldValue: 5
 --- !u!50 &4522533829188861188
 Rigidbody2D:
   serializedVersion: 4

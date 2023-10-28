@@ -17,7 +17,7 @@ public abstract class UnitBase : MonoBehaviour, IDamageable, IMove, IAttack
     public float TimeToMove { get; set; }
     public Vector2 CurrentPosition { get; set; }
     public Vector2 TargetPosition { get; set; }
-    List<BuffScript> currentAppliedBuff = new List<BuffScript>();
+    protected List<BuffScript> currentAppliedBuff = new List<BuffScript>();
     [HideInInspector]
     public Collider2D collider2D;
 
@@ -30,7 +30,13 @@ public abstract class UnitBase : MonoBehaviour, IDamageable, IMove, IAttack
     {
         CurrentHealth = MaxHealth;
         OnHealthChanged?.Invoke();
+        UnitStart();
         PassiveSkill();
+    }
+
+    public virtual void UnitStart()
+    {
+
     }
 
     public virtual void Damage(Damage damage)
@@ -59,6 +65,7 @@ public abstract class UnitBase : MonoBehaviour, IDamageable, IMove, IAttack
 
     public IEnumerator Move(Vector2 direction)
     {
+        BeforeUnitTurn();
         EnemySpawnManager.instance.RemoveUnit(this);
         float elapsedTime = 0f;
         CurrentPosition = transform.position;
@@ -73,6 +80,17 @@ public abstract class UnitBase : MonoBehaviour, IDamageable, IMove, IAttack
 
         transform.position = TargetPosition;
         EnemySpawnManager.instance.MoveUnit(this);
+        AfterUnitTurn();
+    }
+
+    public virtual void BeforeUnitTurn()
+    {
+
+    }
+
+    public virtual void AfterUnitTurn()
+    {
+
     }
 
     public virtual void Attack()
@@ -95,6 +113,29 @@ public abstract class UnitBase : MonoBehaviour, IDamageable, IMove, IAttack
         return transform.position;
     }
 
+    protected virtual void ApplyBuff(BuffScript newBuff)
+    {
+        bool foundSameBuff = false;
+        foreach (var buff in currentAppliedBuff)
+        {
+            if (buff.buffID == newBuff.buffID)
+            {
+                foundSameBuff = true;
+                if (buff.isStackable)
+                {
+                    buff.value += newBuff.value;
+                    if (buff.value > buff.maxValue) buff.value = buff.maxValue;
+                    buff.duration = newBuff.duration;
+                }
+            }
+        }
+        if (!foundSameBuff)
+        {
+            currentAppliedBuff.Add(newBuff);
+            newBuff.OnBuffStart();
+        }
+    }
+
     void RemoveExpiredBuff()
     {
         var tempBuffs = new List<BuffScript>();
@@ -109,19 +150,24 @@ public abstract class UnitBase : MonoBehaviour, IDamageable, IMove, IAttack
         foreach (var buff in tempBuffs)
         {
             currentAppliedBuff.Remove(buff);
+            buff.OnBuffEnd();
         }
     }
 }
 
 public class BuffScript
 {
+    public UnitBase unit;
     public string buffID;
     public bool isStackable;
+    public int maxValue;
     public int value;
+    public int maxDuration;
+    public int duration;
 
     public virtual bool IsExpired()
     {
-        return value <= 0;
+        return value <= 0 || duration <= 0;
     }
 
     public virtual void OnBuffStart()

@@ -57,7 +57,7 @@ public class EnemySpawnManager : MonoBehaviour
         foreach (var tile in tileTransform)
         {
             /*((Vector2)tile.transform.position - movedUnit.GetUnitPosition()).magnitude < 0.4*/
-            if (movedUnit.collider2D.OverlapPoint(tile.transform.position))
+            if (movedUnit.collider2D.bounds.Contains(tile.transform.position))
             {
                 tile.unitOnTile = movedUnit;
                 tileSize--;
@@ -212,7 +212,11 @@ public class EnemySpawnManager : MonoBehaviour
         {
             for (var j = 0; j < unit.ySize; j++)
             {
-                if ( tileTransform[xPos + i, yPos + j].unitOnTile != null)
+                int xValue = xPos + i;
+                int yValue = yPos + j;
+                if (xValue >= xTileCount) xValue = 0;
+                if (yValue >= yTileCount) yValue = 0;
+                if ( tileTransform[xValue, yValue].unitOnTile != null)
                 {
                     return true;
                 }
@@ -229,8 +233,12 @@ public class EnemySpawnManager : MonoBehaviour
         {
             for (var j = 0; j < unit.ySize; j++)
             {
-                totalX += tileTransform[xPos + i, yPos + j].transform.position.x;
-                totalY += tileTransform[xPos + i, yPos + j].transform.position.y;
+                int xValue = xPos + i;
+                int yValue = yPos + j;
+                if (xValue >= xTileCount) xValue = 0;
+                if (yValue >= yTileCount) yValue = 0;
+                totalX += tileTransform[xValue, yValue].transform.position.x;
+                totalY += tileTransform[xValue, yValue].transform.position.y;
             }
         }
         int tilesCount = unit.xSize * unit.ySize;
