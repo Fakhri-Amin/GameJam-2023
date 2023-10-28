@@ -8,8 +8,7 @@ public class EnemySpawnPool : MonoBehaviour
 
     private Dictionary<string, RuntimeObjectPool> runtimePools;
 
-
-    private void Start()
+    private void Awake()
     {
         if (initializeOnStart)
             InitializePools();

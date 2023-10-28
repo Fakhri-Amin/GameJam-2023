@@ -49,9 +49,9 @@ public class UnitBattleHandler : MonoBehaviour
         EnemySpawnManager.instance.RemoveUnit(unitBase);
     }
 
-    public void AddNewUnit()
+    public void AddNewUnit(string unitID)
     {
-        var newUnit = EnemySpawnManager.instance.SpawnNewEnemy();
+        var newUnit = EnemySpawnManager.instance.SpawnNewEnemy(unitID);
         unitList.Add(newUnit);
         unitPositionList.Add(newUnit.GetUnitPosition());
     }

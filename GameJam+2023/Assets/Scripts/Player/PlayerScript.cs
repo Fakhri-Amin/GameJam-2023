@@ -58,9 +58,9 @@ public class PlayerScript : MonoBehaviour, IDamageable
         }
     }
 
-    public void Damage(float damageAmount)
+    public void Damage(Damage damage)
     {
-        CurrentHealth -= damageAmount;
+        CurrentHealth -= damage.damageValue;
         EventManager.instance.OnPlayerDamaged();
     }
 
