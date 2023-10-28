@@ -12,15 +12,13 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        BattleSystem.Instance.OnPlayerTurn += OnPlayerTurn;
-        BattleSystem.Instance.OnUnitTurn += OnUnitTurn;
+        EventManager.onChangeGameStateEvent += OnChangeGameState;
         InstantiateLevel(0);
     }
 
     private void OnDestroy()
     {
-        BattleSystem.Instance.OnPlayerTurn -= OnPlayerTurn;
-        BattleSystem.Instance.OnUnitTurn -= OnUnitTurn;
+        EventManager.onChangeGameStateEvent -= OnChangeGameState;
     }
 
     void InstantiateLevel(int levelID)
@@ -43,25 +41,17 @@ public class LevelManager : MonoBehaviour
         spawnTag = false;
     }
 
-    void OnPlayerTurn(Action onActionComplete)
+    public void OnChangeGameState(BattleSystem.State newState)
     {
-        if (queueUnitSpawn.Count <= 0) return;
-        if (spawnTag)
+        if (newState == BattleSystem.State.PlayerTurn)
         {
+            if (queueUnitSpawn.Count <= 0) return;
             int randomValue = UnityEngine.Random.Range(0, queueUnitSpawn.Count);
             UnitBattleHandler.Instance.AddNewUnit(queueUnitSpawn[randomValue].unitID);
             queueUnitSpawn[randomValue].count--;
             if (queueUnitSpawn[randomValue].count <= 0) queueUnitSpawn.Remove(queueUnitSpawn[randomValue]);
-           
-            spawnTag = false;
         }
     }
-
-    void OnUnitTurn(Action onActionComplete)
-    {
-        spawnTag = true;
-    }
-
 
 }
 

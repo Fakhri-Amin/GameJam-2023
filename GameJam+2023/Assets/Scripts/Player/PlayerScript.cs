@@ -25,7 +25,8 @@ public class PlayerScript : MonoBehaviour, IDamageable
     private void Start()
     {
         EventManager.onLevelStartEvent += OnLevelStart;
-        EventManager.onEnemyCrashPlayerEvent += OnEnemyAttackPlayer;
+        EventManager.onEnemyAttackPlayerEvent += Damage;
+        EventManager.onEnemyCrashPlayerEvent += OnEnemyCrashPlayer;
         EventManager.onPlayerDamagedEvent += OnPlayerDamaged;
         EventManager.instance.OnLevelStart(0);
     }
@@ -33,7 +34,8 @@ public class PlayerScript : MonoBehaviour, IDamageable
     private void OnDestroy()
     {
         EventManager.onLevelStartEvent -= OnLevelStart;
-        EventManager.onEnemyCrashPlayerEvent -= OnEnemyAttackPlayer;
+        EventManager.onEnemyAttackPlayerEvent -= Damage;
+        EventManager.onEnemyCrashPlayerEvent -= OnEnemyCrashPlayer;
         EventManager.onPlayerDamagedEvent -= OnPlayerDamaged;
     }
 
@@ -41,12 +43,6 @@ public class PlayerScript : MonoBehaviour, IDamageable
     {
         CurrentHealth = maxHealth;
         CurrentEnergy = maxEnergy;
-    }
-
-    void OnEnemyAttackPlayer(UnitBase unit)
-    {
-        CurrentHealth -= unit.CrashDamage;
-        EventManager.instance.OnPlayerDamaged();
     }
 
     void OnPlayerDamaged()
@@ -62,6 +58,11 @@ public class PlayerScript : MonoBehaviour, IDamageable
     {
         CurrentHealth -= damage.damageValue;
         EventManager.instance.OnPlayerDamaged();
+    }
+
+    public void OnEnemyCrashPlayer(Damage damage, UnitBase unit)
+    {
+        Damage(damage);
     }
 
     public void Die()

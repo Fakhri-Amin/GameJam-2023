@@ -6,7 +6,12 @@ public class EventManager : MonoBehaviour
 
     public delegate void LevelStart(int levelID);
     public static event LevelStart onLevelStartEvent;
-    public delegate void EnemyCrashPlayer(UnitBase unit);
+    public delegate void ChangeGameState(BattleSystem.State newState);
+    public static event ChangeGameState onChangeGameStateEvent;
+
+    public delegate void EnemyAttackPlayer(Damage damage);
+    public static event EnemyAttackPlayer onEnemyAttackPlayerEvent;
+    public delegate void EnemyCrashPlayer(Damage damage, UnitBase unit);
     public static event EnemyCrashPlayer onEnemyCrashPlayerEvent;
     public delegate void PlayerDamaged();
     public static event PlayerDamaged onPlayerDamagedEvent;
@@ -30,9 +35,19 @@ public class EventManager : MonoBehaviour
         onLevelStartEvent?.Invoke(levelID);
     }
 
-    public void OnEnemyCrashPlayer(UnitBase unit)
+    public void OnChangeGameState(BattleSystem.State newState)
     {
-        onEnemyCrashPlayerEvent?.Invoke(unit);
+        onChangeGameStateEvent?.Invoke(newState);
+    }
+
+    public void OnEnemyAttackPlayer(Damage damage)
+    {
+        onEnemyAttackPlayerEvent?.Invoke(damage);
+    }
+
+    public void OnEnemyCrashPlayer(Damage damage, UnitBase unit)
+    {
+        onEnemyCrashPlayerEvent?.Invoke(damage, unit);
     }
 
     public void OnPlayerDamaged()

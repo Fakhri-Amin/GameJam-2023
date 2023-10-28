@@ -28,6 +28,12 @@ public class UnitBattleHandler : MonoBehaviour
             EnemySpawnManager.instance.MoveUnit(unitBase);
         }
         BattleSystem.Instance.OnUnitTurn += BattleSystem_OnUnitTurn;
+        EventManager.onEnemyCrashPlayerEvent += OnEnemyCrashPlayer;
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.onEnemyCrashPlayerEvent -= OnEnemyCrashPlayer;
     }
 
     private void BattleSystem_OnUnitTurn(Action onActionComplete)
@@ -54,5 +60,10 @@ public class UnitBattleHandler : MonoBehaviour
         var newUnit = EnemySpawnManager.instance.SpawnNewEnemy(unitID);
         unitList.Add(newUnit);
         unitPositionList.Add(newUnit.GetUnitPosition());
+    }
+
+    void OnEnemyCrashPlayer(Damage damage, UnitBase unit)
+    {
+        unit.Die();
     }
 }

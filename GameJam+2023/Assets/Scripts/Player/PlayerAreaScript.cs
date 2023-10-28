@@ -6,7 +6,8 @@ public class PlayerAreaScript : MonoBehaviour
     {
         if (other.TryGetComponent<UnitBase>(out UnitBase unit))
         {
-            EventManager.instance.OnEnemyCrashPlayer(unit);//not working
+            var newDamage = new Damage() { damageValue = unit.CrashDamage + unit.CurrentHealth };
+            EventManager.instance.OnEnemyCrashPlayer(newDamage, unit);
         }
     }
 

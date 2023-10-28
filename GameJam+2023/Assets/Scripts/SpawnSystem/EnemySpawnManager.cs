@@ -26,26 +26,27 @@ public class EnemySpawnManager : MonoBehaviour
         InstantiateTilesTransform();
     }
 
-    private void Start()
+    public void RemoveUnit(UnitBase removedUnit)
     {
-        EventManager.onEnemyCrashPlayerEvent += OnEnemyCrashPlayer;
-    }
-
-    private void OnDestroy()
-    {
-        EventManager.onEnemyCrashPlayerEvent -= OnEnemyCrashPlayer;
-    }
-
-    public void RemoveUnit(UnitBase movedUnit)
-    {
-        int tileSize = movedUnit.xSize * movedUnit.ySize;
+        int tileSize = removedUnit.xSize * removedUnit.ySize;
         foreach (var tile in tileTransform)
         {
-            if (tile.unitOnTile == movedUnit)
+            if (tile.unitOnTile == removedUnit)
             {
                 tile.unitOnTile = null;
                 tileSize--;
                 if (tileSize <= 0) break;
+            }
+        }
+    }
+
+    public void RemoveObject(GameObject removedObject)
+    {
+        foreach (var tile in tileTransform)
+        {
+            if (tile.objectOnTile == removedObject)
+            {
+                tile.objectOnTile = null;
                 break;
             }
         }
@@ -66,12 +67,24 @@ public class EnemySpawnManager : MonoBehaviour
         }
     }
 
+    public void MoveObject(GameObject movedObject)
+    {
+        foreach (var tile in tileTransform)
+        {
+            if ((movedObject.transform.position - tile.transform.position).magnitude < 0.4f)
+            {
+                tile.objectOnTile = movedObject;
+                break;
+            }
+        }
+    }
+
     public UnitBase SpawnNewEnemy(string unitID)
     {
         var newUnit = spawnPool.ActivateObject(unitID, tileTransform[0, 0].transform, unitParent).GetComponent<UnitBase>();
         int xLimit = xTileCount - (newUnit.xSize - 1);
         int yLimit = yTileCount - (newUnit.ySize - 1);
-        int randomX = UnityEngine.Random.Range(5, xLimit);
+        int randomX = UnityEngine.Random.Range(6, xLimit);
         int randomY = UnityEngine.Random.Range(0, yLimit);
         //Debug.Log("Jyo" + randomX + " " + randomY);
         //tileTransform[randomX, randomY].unitOnTile != null
@@ -113,10 +126,10 @@ public class EnemySpawnManager : MonoBehaviour
         return newUnit;
     }
 
-
-    void OnEnemyCrashPlayer(UnitBase unit)
+    public LavaTile SpawnNewLava(UnitBase summonerUnit)
     {
-        unit.Die();
+        // check if tile is empty, then get and instantiate lava , or return null
+        return null;
     }
 
     void InstantiateTilesTransform()
@@ -254,4 +267,5 @@ public class TileTransform
     public int YID;
     public Transform transform;
     public UnitBase unitOnTile;
+    public GameObject objectOnTile;
 }
