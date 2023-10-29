@@ -41,7 +41,7 @@ public abstract class UnitBase : MonoBehaviour, IDamageable, IMove, IAttack
 
     public virtual void Damage(Damage damage)
     {
-        foreach (var buff in currentAppliedBuff) 
+        foreach (var buff in currentAppliedBuff)
         {
             damage = buff.OnUnitReceiveDamage(damage);
         }
@@ -95,7 +95,7 @@ public abstract class UnitBase : MonoBehaviour, IDamageable, IMove, IAttack
 
     public virtual void Attack()
     {
-
+        SoundManager.Instance.PlayEnemyCastSkillSound();
     }
 
     public virtual void PassiveSkill()

@@ -25,5 +25,7 @@ public class BulletCollisionHandler : MonoBehaviour
                 gameObject.SetActive(false);
             }
         }
+
+        SoundManager.Instance.PlayBulletCollideSound();
     }
 }

@@ -93,6 +93,7 @@ public class PlayerAimAndShoot : MonoBehaviour
             {
                 bullet.transform.position = objectRotation.position;
                 bullet.SetActive(true);
+                SoundManager.Instance.PlayPlayerShootSound();
             }
 
             yield return new WaitForSeconds(timeBetweenShot);
