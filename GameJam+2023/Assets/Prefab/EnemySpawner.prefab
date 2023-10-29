@@ -49,17 +49,29 @@ MonoBehaviour:
   levelList:
   - levelID: 0
     initializeUnit:
-    - unitID: greed
-      count: 1
+    - unitID: burntface
+      count: 3
     - unitID: burger
       count: 3
     - unitID: shooter
-      count: 3
+      count: 1
+    - unitID: furious
+      count: 1
     reinforcementUnit:
     - unitID: burger
       count: 5
-    - unitID: shooter
+    - unitID: burntface
       count: 5
+    - unitID: shooter
+      count: 3
+    - unitID: greed
+      count: 1
+    - unitID: burntinside
+      count: 4
+    - unitID: furious
+      count: 5
+    - unitID: number1killer
+      count: 4
 --- !u!114 &112860444281254978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,6 +96,15 @@ MonoBehaviour:
     prefab: {fileID: 5014044501114567941, guid: cfbc9e1a9849d4241ba0c2ece68ab5d1, type: 3}
     initialCount: 0
   - id: number1killer
+    prefab: {fileID: 8995647651510571481, guid: 5a8b1cc249316164498a29ae6978b962, type: 3}
+    initialCount: 0
+  - id: burntface
+    prefab: {fileID: 6625923317574196389, guid: e9c3b4cb9d578c04e96b6b4fe66111e3, type: 3}
+    initialCount: 0
+  - id: burntinside
+    prefab: {fileID: 6837188512422167137, guid: 31c0ca09daca6b44cbd5aebf8206288f, type: 3}
+    initialCount: 0
+  - id: furious
     prefab: {fileID: 948466751070248076, guid: 690cf2211c657874d8d0ecb38a7d0813, type: 3}
     initialCount: 0
 --- !u!114 &2860672772849737254

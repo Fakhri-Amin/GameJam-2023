@@ -49,8 +49,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d21708446bc70f43ab497de88c40cd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <MaxHealth>k__BackingField: 10
+  <MaxHealth>k__BackingField: 25
   <CrashDamage>k__BackingField: 10
+  <xSize>k__BackingField: 1
+  <ySize>k__BackingField: 1
+  collider2D: {fileID: 0}
   bulletPrefab: {fileID: 2966716642455057539, guid: bd77bc3b463d10147a83ecea84a2f738, type: 3}
 --- !u!50 &8560286098592503693
 Rigidbody2D:

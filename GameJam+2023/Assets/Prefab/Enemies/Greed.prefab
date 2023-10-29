@@ -413,13 +413,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88c4fc9c5cc71bd4da5d157d4419f91a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <MaxHealth>k__BackingField: 10
-  <CrashDamage>k__BackingField: 10
+  <MaxHealth>k__BackingField: 80
+  <CrashDamage>k__BackingField: 20
   <xSize>k__BackingField: 2
   <ySize>k__BackingField: 2
   collider2D: {fileID: 0}
   shieldID: greedShield
-  shieldValue: 5
+  shieldValue: 10
 --- !u!50 &4522533829188861188
 Rigidbody2D:
   serializedVersion: 4

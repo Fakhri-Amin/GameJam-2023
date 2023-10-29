@@ -48,8 +48,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f31ec85d2c4c6db42bbde8bfff75b5db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <MaxHealth>k__BackingField: 10
+  <MaxHealth>k__BackingField: 30
   <CrashDamage>k__BackingField: 10
+  <xSize>k__BackingField: 1
+  <ySize>k__BackingField: 1
+  collider2D: {fileID: 0}
 --- !u!50 &7664316359225394300
 Rigidbody2D:
   serializedVersion: 4
