@@ -14,3 +14,8 @@ public class Damage
 {
     public float damageValue;
 }
+
+public class Heal
+{
+    public float healValue;
+}

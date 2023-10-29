@@ -28,6 +28,7 @@ public class PlayerScript : MonoBehaviour, IDamageable
         EventManager.onEnemyAttackPlayerEvent += Damage;
         EventManager.onEnemyCrashPlayerEvent += OnEnemyCrashPlayer;
         EventManager.onPlayerDamagedEvent += OnPlayerDamaged;
+        EventManager.onHealPlayerEvent += HealPlayer;
         EventManager.instance.OnLevelStart(0);
     }
 
@@ -37,6 +38,7 @@ public class PlayerScript : MonoBehaviour, IDamageable
         EventManager.onEnemyAttackPlayerEvent -= Damage;
         EventManager.onEnemyCrashPlayerEvent -= OnEnemyCrashPlayer;
         EventManager.onPlayerDamagedEvent -= OnPlayerDamaged;
+        EventManager.onHealPlayerEvent -= HealPlayer;
     }
 
     void OnLevelStart(int levelID)
@@ -63,6 +65,11 @@ public class PlayerScript : MonoBehaviour, IDamageable
     public void OnEnemyCrashPlayer(Damage damage, UnitBase unit)
     {
         Damage(damage);
+    }
+
+    void HealPlayer(Heal heal)
+    {
+        CurrentHealth += heal.healValue;
     }
 
     public void Die()

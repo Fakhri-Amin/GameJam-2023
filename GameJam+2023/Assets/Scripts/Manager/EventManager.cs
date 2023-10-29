@@ -13,6 +13,8 @@ public class EventManager : MonoBehaviour
     public static event EnemyAttackPlayer onEnemyAttackPlayerEvent;
     public delegate void EnemyCrashPlayer(Damage damage, UnitBase unit);
     public static event EnemyCrashPlayer onEnemyCrashPlayerEvent;
+    public delegate void HealPlayer(Heal heal);
+    public static event HealPlayer onHealPlayerEvent;
     public delegate void PlayerDamaged();
     public static event PlayerDamaged onPlayerDamagedEvent;
     public delegate void PlayerDead();
@@ -48,6 +50,11 @@ public class EventManager : MonoBehaviour
     public void OnEnemyCrashPlayer(Damage damage, UnitBase unit)
     {
         onEnemyCrashPlayerEvent?.Invoke(damage, unit);
+    }
+
+    public void OnHealPlayer(Heal heal)
+    {
+        onHealPlayerEvent?.Invoke(heal);
     }
 
     public void OnPlayerDamaged()
