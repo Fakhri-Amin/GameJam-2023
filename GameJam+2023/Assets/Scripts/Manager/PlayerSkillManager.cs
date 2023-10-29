@@ -11,7 +11,9 @@ public class PlayerSkillManager : MonoBehaviour
     private void Awake()
     {
         skillList = new List<SkillScript>();
+        healSkill.skillID = skillList.Count;
         skillList.Add(healSkill);
+        explosionSkill.skillID = skillList.Count;
         skillList.Add(explosionSkill);
     }
 
@@ -19,11 +21,12 @@ public class PlayerSkillManager : MonoBehaviour
     {
         EventManager.onChangeGameStateEvent += OnChangeGameState;
         EventManager.onLevelStartEvent += OnLevelStart;
+        BattleSystem.Instance.OnPlayerTurn += BattleSystem_OnPlayerTurn;
         foreach (var skill in skillList)
         {
             foreach (var skillButton in UIManager.instance.playerSkills.playerSkills)
             {
-                if (skillButton.skillID == skill.skillID)
+                if (skillButton.skillID == skill.skillName)
                 {
                     skill.SetButton(skillButton);
                     skillButton.InstantiateButton(skill);
@@ -36,6 +39,16 @@ public class PlayerSkillManager : MonoBehaviour
     private void OnDestroy()
     {
         EventManager.onChangeGameStateEvent -= OnChangeGameState;
+        BattleSystem.Instance.OnPlayerTurn -= BattleSystem_OnPlayerTurn;
+    }
+
+    private void BattleSystem_OnPlayerTurn(Action onActionComplete)
+    {
+        if (GameInput.Instance.IsOnMouseLeftUp() && !GameInput.Instance.IsBasicAttack())
+        {
+            Vector2 mousePosition = GameInput.Instance.GetMousePosition();
+            (skillList[GameInput.Instance.CurrentSelectedSkill()] as AimSkill).UseSkill(EnemySpawnManager.instance.GetNearestTile(mousePosition));
+        }
     }
 
     public void OnLevelStart(int levelID)
@@ -56,14 +69,13 @@ public class PlayerSkillManager : MonoBehaviour
             }
         }
     }
-
-
 }
 
 [System.Serializable]
 public class SkillScript
 {
-    public string skillID;
+    public string skillName;
+    public int skillID;
     public int cooldownDuration;
 
     int cooldownRemaining;
@@ -97,9 +109,23 @@ public class SkillScript
     public void UpdateCooldown(int newValue)
     {
         cooldownRemaining = newValue;
-        skillButton.UpdateCooldown(cooldownRemaining / cooldownDuration);
+        if (skillButton) skillButton.UpdateCooldown(cooldownRemaining / cooldownDuration);
     }
 
+}
+
+public class AimSkill : SkillScript
+{
+    public override void OnSkillSelect()
+    {
+        base.OnSkillSelect();
+
+    }
+
+    public virtual void UseSkill(TileTransform tile )
+    {
+
+    }
 }
 
 [System.Serializable]
@@ -122,7 +148,7 @@ public class HealSkillScript : SkillScript
 }
 
 [System.Serializable]
-public class ExplosionScript : SkillScript
+public class ExplosionScript : AimSkill
 {
     public int damageValue;
     public int xSize;
@@ -130,11 +156,24 @@ public class ExplosionScript : SkillScript
 
     public override void OnSkillSelect()
     {
+        GameInput.Instance.EquipSkill(skillID);
         base.OnSkillSelect();
     }
 
-    public override void OnSkillUse()
+    public override void UseSkill(TileTransform tile)
     {
-        base.OnSkillUse();
+        for (var i = tile.GetXLeft(); i <= tile.GetXRight(); i++)
+        {
+            for (var j = tile.GetYDown(); j <= tile.GetYUp(); j++)
+            {
+                if (tile.unitOnTile != null)
+                {
+                    var newDamage = new Damage() { damageValue = damageValue };
+                    tile.unitOnTile.Damage(newDamage);
+                }
+            }
+        }
+        base.UseSkill(tile);
+        OnSkillUse();
     }
 }
