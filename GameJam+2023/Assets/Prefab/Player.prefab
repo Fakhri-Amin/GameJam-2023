@@ -479,11 +479,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healSkill:
-    skillID: heal
+    skillName: heal
+    skillID: 0
     cooldownDuration: 3
     healValue: 20
   explosionSkill:
-    skillID: explosion
+    skillName: explosion
+    skillID: 0
     cooldownDuration: 3
     damageValue: 5
     xSize: 3

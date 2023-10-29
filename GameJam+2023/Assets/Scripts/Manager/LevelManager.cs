@@ -8,12 +8,11 @@ public class LevelManager : MonoBehaviour
 
     List<UnitSpawnData> queueUnitSpawn = new List<UnitSpawnData>();
     bool spawnTag;
-
+    int currentLevel = -1;
 
     private void Start()
     {
         EventManager.onChangeGameStateEvent += OnChangeGameState;
-        InstantiateLevel(0);
     }
 
     private void OnDestroy()
@@ -21,8 +20,17 @@ public class LevelManager : MonoBehaviour
         EventManager.onChangeGameStateEvent -= OnChangeGameState;
     }
 
+    private void Update()
+    {
+        if (currentLevel < 0)
+        {
+            InstantiateLevel(0);
+        }
+    }
+
     void InstantiateLevel(int levelID)
     {
+        currentLevel = levelID;
         foreach (var level in levelList)
         {
             if (level.levelID == levelID)

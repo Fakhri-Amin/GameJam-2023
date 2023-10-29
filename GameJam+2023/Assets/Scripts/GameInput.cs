@@ -8,7 +8,7 @@ public class GameInput : MonoBehaviour
     public static GameInput Instance;
 
     private PlayerControls playerControls;
-
+    private int currentSkillControl = -1;
     private void Awake()
     {
         Instance = this;
@@ -48,5 +48,24 @@ public class GameInput : MonoBehaviour
     public bool IsOnMouseLeftUp()
     {
         return Mouse.current.leftButton.wasReleasedThisFrame;
+    }
+
+    public void EquipSkill(int skillID)
+    {
+        currentSkillControl = skillID;
+        if (skillID >= 0)
+        {
+            UIManager.instance.playerSkills.EnableCancelButton();
+        }
+    }
+
+    public bool IsBasicAttack()
+    {
+        return currentSkillControl < 0;
+    }
+
+    public int CurrentSelectedSkill()
+    {
+        return currentSkillControl;
     }
 }

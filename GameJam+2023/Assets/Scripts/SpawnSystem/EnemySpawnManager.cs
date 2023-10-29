@@ -26,6 +26,22 @@ public class EnemySpawnManager : MonoBehaviour
         InstantiateTilesTransform();
     }
 
+    public TileTransform GetNearestTile(Vector2 position)
+    {
+        TileTransform nearestTile = null;
+        float nearestRange = float.MaxValue;
+        foreach (var tile in tileTransform)
+        {
+            float currentRange = ((Vector2)tile.transform.position - position).magnitude;
+            if (currentRange < nearestRange)
+            {
+                nearestRange = currentRange;
+                nearestTile = tile;
+            }
+        }
+        return nearestTile;
+    }
+
     public void RemoveUnit(UnitBase removedUnit)
     {
         int tileSize = removedUnit.xSize * removedUnit.ySize;
@@ -268,4 +284,24 @@ public class TileTransform
     public Transform transform;
     public UnitBase unitOnTile;
     public GameObject objectOnTile;
+
+    public int GetXLeft()
+    {
+        return (XID <= 0) ? 0 : XID - 1;
+    }
+
+    public int GetXRight()
+    {
+        return (XID + 1 >= EnemySpawnManager.instance.xTileCount) ? XID : XID + 1;
+    }
+
+    public int GetYDown()
+    {
+        return (YID <= 0) ? 0 : YID - 1;
+    }
+
+    public int GetYUp()
+    {
+        return (YID + 1 >= EnemySpawnManager.instance.yTileCount) ? YID : YID + 1;
+    }
 }

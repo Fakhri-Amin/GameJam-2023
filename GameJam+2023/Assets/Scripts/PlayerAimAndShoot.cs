@@ -32,12 +32,17 @@ public class PlayerAimAndShoot : MonoBehaviour
         BattleSystem.Instance.OnPlayerTurn += BattleSystem_OnPlayerTurn;
     }
 
+    private void OnDestroy()
+    {
+        BattleSystem.Instance.OnPlayerTurn -= BattleSystem_OnPlayerTurn;
+    }
+
     private void BattleSystem_OnPlayerTurn(Action onActionComplete)
     {
         HandleRotation();
 
         // Handle Shooting
-        if (GameInput.Instance.IsOnMouseLeftUp())
+        if (GameInput.Instance.IsOnMouseLeftUp() && GameInput.Instance.IsBasicAttack())
         {
             onActionComplete();
             StartCoroutine(Shoot());
@@ -46,7 +51,7 @@ public class PlayerAimAndShoot : MonoBehaviour
 
     private void HandleRotation()
     {
-        if (GameInput.Instance.IsOnMouseLeftBeingPressed())
+        if (GameInput.Instance.IsOnMouseLeftBeingPressed() && GameInput.Instance.IsBasicAttack())
         {
             lineRenderer.enabled = true;
 
