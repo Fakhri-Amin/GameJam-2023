@@ -1,0 +1,11 @@
+Winning page
+Ditaruh di cinematic 7-14
+nama sound: mixkit-pop-track-03-729
+
+Main Menu
+Ditaruh di halaman main menu
+nama sound: Main_Theme_mixkit-protesting-robot-1153
+
+BGM Gameplay
+Ditaruh ketika permainan dimulai
+nama sound: Main_Theme_mixkit-protesting-robot-1153

@@ -1,0 +1,23 @@
+Click Button
+Ditaruh di setiap button diklik
+nama sound: click_next_chat_sound
+
+Sirene
+Ditaruh di cinematic awal page 3 - 6
+nama sound: mixkit-sci-fi-ship-siren-alert-1653
+
+SFX Tembak
+ditaruh ketika player menembak (ditaruh di bullet pertama aja, jd walopun bullet yg ditembak udah lebih dari 1, tetep 1 suara (jika bisa))
+nama sound: mixkit-heal-soft-water-spell-878
+
+SFX bullet collision with enemy
+ditaruh ketika terjadi sentuhan antara bullet dan enemy
+nama sound: mixkit-deep-water-bubbles-1321
+
+SFX Enemy skill
+Ditaruh ketika enemy mengeluarkan skill
+nama sound: mixkit-fireball-spell-1347
+
+SFX Player skill
+Ditaruh ketika player memencet button skill
+nama sound: mixkit-static-radio-noise-sound-2559
