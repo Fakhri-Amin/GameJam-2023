@@ -10,7 +10,6 @@ public class GameInput : MonoBehaviour
 
     private PlayerControls playerControls;
     private int currentSkillControl = -1;
-    Vector2 lastClickPos = Vector2.zero;
     bool insideGameplay;
 
     private void Awake()
@@ -32,21 +31,6 @@ public class GameInput : MonoBehaviour
         playerControls.Dispose();
     }
 
-    private void Update()
-    {
-        if (Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 100))
-            {
-                Debug.Log(hit.transform.name);
-                Debug.Log("hit");
-            }
-            lastClickPos = Mouse.current.position.ReadValue();
-        }
-    }
-
     public Vector2 GetMovementVectorNormalized()
     {
         Vector2 inputVector = playerControls.Player.Movement.ReadValue<Vector2>();
@@ -61,17 +45,17 @@ public class GameInput : MonoBehaviour
 
     public bool IsOnMouseLeftBeingPressedGameplay()
     {
-        return Mouse.current.leftButton.isPressed && GetComponent<Collider>().bounds.Contains(lastClickPos);
+        return Mouse.current.leftButton.isPressed && insideGameplay;
     }
 
     public bool IsOnMouseLeftUpGameplay()
     {
-        return Mouse.current.leftButton.wasReleasedThisFrame && GetComponent<Collider>().bounds.Contains(lastClickPos);
+        return Mouse.current.leftButton.wasReleasedThisFrame && insideGameplay;
     }
 
     public bool IsOnMouseLeftUpOutsideGameplay()
     {
-        return Mouse.current.leftButton.wasReleasedThisFrame && !GetComponent<Collider>().bounds.Contains(lastClickPos);
+        return Mouse.current.leftButton.wasReleasedThisFrame && !insideGameplay;
     }
 
     public void UpdatePointerGameplay(bool isInsideGameplay)
