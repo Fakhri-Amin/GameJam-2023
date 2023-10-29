@@ -18,7 +18,8 @@ public class BulletCollisionHandler : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent<IDamageable>(out IDamageable damageable))
         {
-            damageable.Damage(damageAmount);
+            var newDamage = new Damage() { damageValue = damageAmount };
+            damageable.Damage(newDamage);
             if (other.gameObject.TryGetComponent<PlayerScript>(out PlayerScript player))
             {
                 gameObject.SetActive(false);

@@ -6,13 +6,12 @@ public class EnemySpawnManager : MonoBehaviour
 {
     public static EnemySpawnManager instance { get; private set; }
     public EnemySpawnPool spawnPool;
+    public Transform unitParent;
     public List<Transform> tilesParentList;
     public TileTransform[,] tileTransform;
 
-    public int xSize;
-    public int ySize;
-
-    bool spawnTag;
+    public int xTileCount;
+    public int yTileCount;
 
     private void Awake()
     {
@@ -27,27 +26,27 @@ public class EnemySpawnManager : MonoBehaviour
         InstantiateTilesTransform();
     }
 
-    private void Start()
+    public void RemoveUnit(UnitBase removedUnit)
     {
-        BattleSystem.Instance.OnPlayerTurn += OnPlayerTurn;
-        BattleSystem.Instance.OnUnitTurn += OnUnitTurn;
-        EventManager.onEnemyCrashPlayerEvent += OnEnemyCrashPlayer;
+        int tileSize = removedUnit.xSize * removedUnit.ySize;
+        foreach (var tile in tileTransform)
+        {
+            if (tile.unitOnTile == removedUnit)
+            {
+                tile.unitOnTile = null;
+                tileSize--;
+                if (tileSize <= 0) break;
+            }
+        }
     }
 
-    private void OnDestroy()
-    {
-        BattleSystem.Instance.OnPlayerTurn -= OnPlayerTurn;
-        BattleSystem.Instance.OnUnitTurn -= OnUnitTurn;
-        EventManager.onEnemyCrashPlayerEvent -= OnEnemyCrashPlayer;
-    }
-
-    public void RemoveUnit(UnitBase movedUnit)
+    public void RemoveObject(GameObject removedObject)
     {
         foreach (var tile in tileTransform)
         {
-            if (tile.unitOnTile == movedUnit)
+            if (tile.objectOnTile == removedObject)
             {
-                tile.unitOnTile = null;
+                tile.objectOnTile = null;
                 break;
             }
         }
@@ -55,73 +54,89 @@ public class EnemySpawnManager : MonoBehaviour
 
     public void MoveUnit(UnitBase movedUnit)
     {
+        int tileSize = movedUnit.xSize * movedUnit.ySize;
         foreach (var tile in tileTransform)
         {
-            if (((Vector2)tile.transform.position - movedUnit.GetUnitPosition()).magnitude < 0.4)
+            /*((Vector2)tile.transform.position - movedUnit.GetUnitPosition()).magnitude < 0.4*/
+            if (movedUnit.collider2D.bounds.Contains(tile.transform.position))
             {
                 tile.unitOnTile = movedUnit;
+                tileSize--;
+                if (tileSize <= 0) break;
+            }
+        }
+    }
+
+    public void MoveObject(GameObject movedObject)
+    {
+        foreach (var tile in tileTransform)
+        {
+            if ((movedObject.transform.position - tile.transform.position).magnitude < 0.4f)
+            {
+                tile.objectOnTile = movedObject;
                 break;
             }
         }
     }
 
-    public UnitBase SpawnNewEnemy()
+    public UnitBase SpawnNewEnemy(string unitID)
     {
-        int randomX = UnityEngine.Random.Range(0, xSize);
-        int randomY = UnityEngine.Random.Range(0, ySize);
+        var newUnit = spawnPool.ActivateObject(unitID, tileTransform[0, 0].transform, unitParent).GetComponent<UnitBase>();
+        int xLimit = xTileCount - (newUnit.xSize - 1);
+        int yLimit = yTileCount - (newUnit.ySize - 1);
+        int randomX = UnityEngine.Random.Range(6, xLimit);
+        int randomY = UnityEngine.Random.Range(0, yLimit);
         //Debug.Log("Jyo" + randomX + " " + randomY);
-        while (tileTransform[randomX, randomY].unitOnTile != null)
+        //tileTransform[randomX, randomY].unitOnTile != null
+        int xStart = randomX;
+        while (IsTilesFilled(randomX, randomY, newUnit)) 
         {
-            if (tileTransform[(randomX >= xSize) ? 0: randomX + 1, randomY].unitOnTile == null)
-            {
-                randomX++;
-            }
-            else if (tileTransform[randomX, (randomY >= ySize)? 0: randomY + 1].unitOnTile == null)
+            if (IsTilesFilled(randomX, (randomY >= yLimit) ? 0 : randomY + 1, newUnit)) 
             {
                 randomY++;
             }
-            else if (tileTransform[randomX, (randomY < 0)? ySize - 1: randomY - 1].unitOnTile == null)
+            else if (IsTilesFilled(randomX, (randomY < 0) ? yTileCount - 1 : randomY - 1, newUnit))
             {
-                randomY--;
+                randomY--; 
             }
-            else if (tileTransform[(randomX < 0)? xSize - 1:randomX - 1, randomY].unitOnTile == null)
+            else if (IsTilesFilled((randomX < 0) ? xTileCount - 1 : randomX - 1, randomY, newUnit)) 
             {
                 randomX--;
             }
-            if (randomX >= xSize) randomX = 0;
-            else if (randomX < 0) randomX = xSize - 1;
-            if (randomY >= ySize) randomY = 0;
-            else if (randomY < 0) randomY = ySize - 1;
+            else if (IsTilesFilled((randomX >= xLimit) ? 0 : randomX + 1, randomY, newUnit)) 
+            {
+                randomX++; 
+            }
+            else
+            {
+                randomX++;
+                if (randomX == xStart || (randomX >= xTileCount && xStart == 0)) randomY++;
+            }
+            if (randomX >= xTileCount) randomX = 0;
+            else if (randomX < 0) randomX = xTileCount - 1;
+            if (randomY >= yTileCount) randomY = 0;
+            else if (randomY < 0) randomY = yTileCount - 1;
+           
         }
-        var newUnit = spawnPool.ActivateObject("burger", tileTransform[randomX, randomY].transform).GetComponent<UnitBase>();
+        
         tileTransform[randomX, randomY].unitOnTile = newUnit;
+        newUnit.transform.position = GetCenterPosition(randomX, randomY, newUnit);
+        newUnit.transform.rotation = tileTransform[randomX, randomY].transform.rotation;
+        newUnit.transform.localScale = tileTransform[randomX, randomY].transform.localScale;
         return newUnit;
     }
 
-    void OnPlayerTurn(Action onActionComplete)
+    public LavaTile SpawnNewLava(UnitBase summonerUnit)
     {
-        if (spawnTag)
-        {
-            UnitBattleHandler.Instance.AddNewUnit();
-            spawnTag = false;
-        }
-    }
-
-    void OnUnitTurn(Action onActionComplete)
-    {
-        spawnTag = true;
-    }
-
-    void OnEnemyCrashPlayer(UnitBase unit)
-    {
-        unit.Die();
+        // check if tile is empty, then get and instantiate lava , or return null
+        return null;
     }
 
     void InstantiateTilesTransform()
     {
         List<float> xPosition = new List<float>();
         List<float> yPosition = new List<float>();
-        tileTransform = new TileTransform[xSize, ySize];
+        tileTransform = new TileTransform[xTileCount, yTileCount];
         foreach (var tileParent in tilesParentList)
         {
             foreach (Transform tile in tileParent)
@@ -186,7 +201,7 @@ public class EnemySpawnManager : MonoBehaviour
 
     void SwapXpos(int xPos1, int xPos2)
     {
-        for (var i = 0; i < ySize; i++)
+        for (var i = 0; i < yTileCount; i++)
         {
             var tempVar = tileTransform[xPos1, i].transform;
             tileTransform[xPos1, i].transform = tileTransform[xPos2, i].transform;
@@ -196,12 +211,53 @@ public class EnemySpawnManager : MonoBehaviour
 
     void SwapYpos(int yPos1, int yPos2)
     {
-        for (var i = 0; i < xSize; i++)
+        for (var i = 0; i < xTileCount; i++)
         {
             var tempVar = tileTransform[i, yPos1].transform;
             tileTransform[i, yPos1].transform = tileTransform[i, yPos2].transform;
             tileTransform[i, yPos2].transform = tempVar;
         }
+    }
+
+    bool IsTilesFilled(int xPos, int yPos, UnitBase unit)
+    {
+        for (var i = 0; i < unit.xSize; i++)
+        {
+            for (var j = 0; j < unit.ySize; j++)
+            {
+                int xValue = xPos + i;
+                int yValue = yPos + j;
+                if (xValue >= xTileCount) xValue = 0;
+                if (yValue >= yTileCount) yValue = 0;
+                if ( tileTransform[xValue, yValue].unitOnTile != null)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    Vector2 GetCenterPosition(int xPos, int yPos, UnitBase unit)
+    {
+        var totalX = 0f;
+        var totalY = 0f;
+        for (var i = 0; i < unit.xSize; i++)
+        {
+            for (var j = 0; j < unit.ySize; j++)
+            {
+                int xValue = xPos + i;
+                int yValue = yPos + j;
+                if (xValue >= xTileCount) xValue = 0;
+                if (yValue >= yTileCount) yValue = 0;
+                totalX += tileTransform[xValue, yValue].transform.position.x;
+                totalY += tileTransform[xValue, yValue].transform.position.y;
+            }
+        }
+        int tilesCount = unit.xSize * unit.ySize;
+        var centerX = totalX / tilesCount;
+        var centerY = totalY / tilesCount;
+        return new Vector2(centerX, centerY);
     }
 }
 
@@ -211,4 +267,5 @@ public class TileTransform
     public int YID;
     public Transform transform;
     public UnitBase unitOnTile;
+    public GameObject objectOnTile;
 }

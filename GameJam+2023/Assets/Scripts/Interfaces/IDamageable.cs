@@ -6,6 +6,16 @@ public interface IDamageable
 {
     float CurrentHealth { get; set; }
     float MaxHealth { get; set; }
-    void Damage(float damageAmount);
+    void Damage(Damage damage);
     void Die();
+}
+
+public class Damage
+{
+    public float damageValue;
+}
+
+public class Heal
+{
+    public float healValue;
 }

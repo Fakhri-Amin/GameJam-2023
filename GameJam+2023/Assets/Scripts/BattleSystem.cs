@@ -36,13 +36,13 @@ public class BattleSystem : MonoBehaviour
         switch (state)
         {
             case State.PlayerTurn:
-                OnPlayerTurn?.Invoke(() => { state = State.Waiting; });
+                OnPlayerTurn?.Invoke(() => { state = State.Waiting; EventManager.instance.OnChangeGameState(state); });
                 break;
             case State.Waiting:
-                OnWaiting?.Invoke(() => { state = State.UnitTurn; });
+                OnWaiting?.Invoke(() => { state = State.UnitTurn; EventManager.instance.OnChangeGameState(state); });
                 break;
             case State.UnitTurn:
-                OnUnitTurn?.Invoke(() => { state = State.PlayerTurn; });
+                OnUnitTurn?.Invoke(() => { state = State.PlayerTurn; EventManager.instance.OnChangeGameState(state); });
                 break;
             default:
                 break;

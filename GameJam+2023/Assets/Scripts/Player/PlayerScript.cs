@@ -25,28 +25,26 @@ public class PlayerScript : MonoBehaviour, IDamageable
     private void Start()
     {
         EventManager.onLevelStartEvent += OnLevelStart;
-        EventManager.onEnemyCrashPlayerEvent += OnEnemyAttackPlayer;
+        EventManager.onEnemyAttackPlayerEvent += Damage;
+        EventManager.onEnemyCrashPlayerEvent += OnEnemyCrashPlayer;
         EventManager.onPlayerDamagedEvent += OnPlayerDamaged;
+        EventManager.onHealPlayerEvent += HealPlayer;
         EventManager.instance.OnLevelStart(0);
     }
 
     private void OnDestroy()
     {
         EventManager.onLevelStartEvent -= OnLevelStart;
-        EventManager.onEnemyCrashPlayerEvent -= OnEnemyAttackPlayer;
+        EventManager.onEnemyAttackPlayerEvent -= Damage;
+        EventManager.onEnemyCrashPlayerEvent -= OnEnemyCrashPlayer;
         EventManager.onPlayerDamagedEvent -= OnPlayerDamaged;
+        EventManager.onHealPlayerEvent -= HealPlayer;
     }
 
     void OnLevelStart(int levelID)
     {
         CurrentHealth = maxHealth;
         CurrentEnergy = maxEnergy;
-    }
-
-    void OnEnemyAttackPlayer(UnitBase unit)
-    {
-        CurrentHealth -= unit.CrashDamage;
-        EventManager.instance.OnPlayerDamaged();
     }
 
     void OnPlayerDamaged()
@@ -58,10 +56,20 @@ public class PlayerScript : MonoBehaviour, IDamageable
         }
     }
 
-    public void Damage(float damageAmount)
+    public void Damage(Damage damage)
     {
-        CurrentHealth -= damageAmount;
+        CurrentHealth -= damage.damageValue;
         EventManager.instance.OnPlayerDamaged();
+    }
+
+    public void OnEnemyCrashPlayer(Damage damage, UnitBase unit)
+    {
+        Damage(damage);
+    }
+
+    void HealPlayer(Heal heal)
+    {
+        CurrentHealth += heal.healValue;
     }
 
     public void Die()
