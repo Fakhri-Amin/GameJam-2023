@@ -631,7 +631,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6391972249133085718}
         m_TargetAssemblyTypeName: GameSceneManagerUI, Assembly-CSharp
         m_MethodName: LoadMainMenu
         m_Mode: 1
@@ -764,9 +764,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6391972249133085718}
         m_TargetAssemblyTypeName: GameSceneManagerUI, Assembly-CSharp
-        m_MethodName: LoadCurrentScene
+        m_MethodName: LoadGameScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -81,6 +81,7 @@ public class SkillScript
     public string skillName;
     public int skillID;
     public int cooldownDuration;
+    public float manaCost;
 
     int cooldownRemaining;
     PlayerSkillButton skillButton;

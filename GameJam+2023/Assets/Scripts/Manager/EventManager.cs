@@ -19,6 +19,8 @@ public class EventManager : MonoBehaviour
     public static event PlayerDamaged onPlayerDamagedEvent;
     public delegate void PlayerDead();
     public static event PlayerDead onPlayerDeadEvent;
+    public delegate void LevelFinish();
+    public static event LevelFinish onLevelFinishEvent;
 
     private void Awake()
     {
@@ -65,5 +67,10 @@ public class EventManager : MonoBehaviour
     public void OnPlayerDead()
     {
         onPlayerDeadEvent?.Invoke();
+    }
+
+    public void OnLevelFinish()
+    {
+        onLevelFinishEvent?.Invoke();
     }
 }

@@ -6,6 +6,9 @@ public class UIManager : MonoBehaviour
     public UIPlayerStats playerStats;
     public UIPlayerSkills playerSkills;
 
+    public GameObject WinCutscene;
+    public GameObject LoseCutscene;
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -18,5 +21,26 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        EventManager.onLevelFinishEvent += PlayWinCutscene;
+        EventManager.onPlayerDeadEvent += PlayLosePanel;
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.onLevelFinishEvent -= PlayWinCutscene;
+        EventManager.onPlayerDeadEvent -= PlayLosePanel;
+    }
+
+    public void PlayWinCutscene()
+    {
+        WinCutscene.SetActive(true);
+    }
+
+    public void PlayLosePanel()
+    {
+        LoseCutscene.SetActive(true);
+    }
 
 }
