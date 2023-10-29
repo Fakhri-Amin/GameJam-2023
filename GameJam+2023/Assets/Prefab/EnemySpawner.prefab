@@ -83,6 +83,9 @@ MonoBehaviour:
   - id: greed
     prefab: {fileID: 5014044501114567941, guid: cfbc9e1a9849d4241ba0c2ece68ab5d1, type: 3}
     initialCount: 0
+  - id: number1killer
+    prefab: {fileID: 948466751070248076, guid: 690cf2211c657874d8d0ecb38a7d0813, type: 3}
+    initialCount: 0
 --- !u!114 &2860672772849737254
 MonoBehaviour:
   m_ObjectHideFlags: 0

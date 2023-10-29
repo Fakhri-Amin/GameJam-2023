@@ -7,7 +7,6 @@ public class LevelManager : MonoBehaviour
     public List<Level> levelList;
 
     List<UnitSpawnData> queueUnitSpawn = new List<UnitSpawnData>();
-    bool spawnTag;
     int currentLevel = -1;
 
     private void Start()
@@ -46,7 +45,6 @@ public class LevelManager : MonoBehaviour
                 break;
             }
         }
-        spawnTag = false;
     }
 
     public void OnChangeGameState(BattleSystem.State newState)

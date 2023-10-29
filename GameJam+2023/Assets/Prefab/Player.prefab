@@ -485,7 +485,7 @@ MonoBehaviour:
     healValue: 20
   explosionSkill:
     skillName: explosion
-    skillID: 0
+    skillID: 1
     cooldownDuration: 3
     damageValue: 5
     xSize: 3

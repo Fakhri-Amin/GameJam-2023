@@ -9,17 +9,17 @@ public class UIPlayerSkills : MonoBehaviour
 
     private void Start()
     {
-        cancelButton.gameObject.SetActive(false);
+        //cancelButton.gameObject.SetActive(false);
     }
 
     public void EnableCancelButton()
     {
-        cancelButton.gameObject.SetActive(true);
+        //cancelButton.gameObject.SetActive(true);
     }
 
     public void CancelButton()
     {
         GameInput.Instance.EquipSkill(-1);
-        cancelButton.gameObject.SetActive(false);
+        //cancelButton.gameObject.SetActive(false);
     }
 }

@@ -42,7 +42,7 @@ public class PlayerAimAndShoot : MonoBehaviour
         HandleRotation();
 
         // Handle Shooting
-        if (GameInput.Instance.IsOnMouseLeftUp() && GameInput.Instance.IsBasicAttack())
+        if (GameInput.Instance.IsOnMouseLeftUpGameplay() && GameInput.Instance.IsBasicAttack())
         {
             onActionComplete();
             StartCoroutine(Shoot());
@@ -51,7 +51,7 @@ public class PlayerAimAndShoot : MonoBehaviour
 
     private void HandleRotation()
     {
-        if (GameInput.Instance.IsOnMouseLeftBeingPressed() && GameInput.Instance.IsBasicAttack())
+        if (GameInput.Instance.IsOnMouseLeftBeingPressedGameplay() && GameInput.Instance.IsBasicAttack())
         {
             lineRenderer.enabled = true;
 

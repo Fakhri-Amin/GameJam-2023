@@ -7,6 +7,7 @@ public class PlayerSkillManager : MonoBehaviour
     public HealSkillScript healSkill;
     public ExplosionScript explosionSkill;
     List<SkillScript> skillList;
+    bool isPlayerTurn;
 
     private void Awake()
     {
@@ -21,7 +22,6 @@ public class PlayerSkillManager : MonoBehaviour
     {
         EventManager.onChangeGameStateEvent += OnChangeGameState;
         EventManager.onLevelStartEvent += OnLevelStart;
-        BattleSystem.Instance.OnPlayerTurn += BattleSystem_OnPlayerTurn;
         foreach (var skill in skillList)
         {
             foreach (var skillButton in UIManager.instance.playerSkills.playerSkills)
@@ -39,17 +39,20 @@ public class PlayerSkillManager : MonoBehaviour
     private void OnDestroy()
     {
         EventManager.onChangeGameStateEvent -= OnChangeGameState;
-        BattleSystem.Instance.OnPlayerTurn -= BattleSystem_OnPlayerTurn;
     }
 
-    private void BattleSystem_OnPlayerTurn(Action onActionComplete)
+    private void Update()
     {
-        if (GameInput.Instance.IsOnMouseLeftUp() && !GameInput.Instance.IsBasicAttack())
+        if (isPlayerTurn)
         {
-            Vector2 mousePosition = GameInput.Instance.GetMousePosition();
-            (skillList[GameInput.Instance.CurrentSelectedSkill()] as AimSkill).UseSkill(EnemySpawnManager.instance.GetNearestTile(mousePosition));
+            if (GameInput.Instance.IsOnMouseLeftUpOutsideGameplay() && !GameInput.Instance.IsBasicAttack())
+            {
+                Vector2 mousePosition = GameInput.Instance.GetMousePosition();
+                (skillList[GameInput.Instance.CurrentSelectedSkill()] as AimSkill).UseSkill(EnemySpawnManager.instance.GetNearestTile(mousePosition));
+            }
         }
     }
+
 
     public void OnLevelStart(int levelID)
     {
@@ -68,6 +71,7 @@ public class PlayerSkillManager : MonoBehaviour
                 skill.TurnPass();
             }
         }
+        isPlayerTurn = newState == BattleSystem.State.PlayerTurn;
     }
 }
 
