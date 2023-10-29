@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f844f3ae5051ba047be6fb2c4dad53d1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b15922e9c04da15458f22aa084ac7d0d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -144,6 +144,8 @@ PlayableDirector:
     value: {fileID: 154981763405129897}
   - key: {fileID: -7254047933696978540, guid: cf5cc2b60c971dd4589c9480a9d76fce, type: 2}
     value: {fileID: 4836364489888656894}
+  - key: {fileID: -3402266528570791240, guid: cf5cc2b60c971dd4589c9480a9d76fce, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &3718081690270728044
@@ -343,9 +345,9 @@ RectTransform:
   - {fileID: 8556102969083488899}
   m_Father: {fileID: 5167690158293562066}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 134.28853, y: -158.46399}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 245.483, y: 76.372}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1889615630802779971
