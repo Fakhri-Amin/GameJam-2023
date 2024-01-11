@@ -6,7 +6,13 @@ public class EventManager : MonoBehaviour
 
     public delegate void LevelStart(int levelID);
     public static event LevelStart onLevelStartEvent;
-    public delegate void ChangeGameState(BattleSystem.State newState);
+    public delegate void LevelFinish();
+    public static event LevelFinish onLevelFinishEvent;
+    public delegate void CampaignStart(int campaignID);
+    public static event CampaignStart onCampaignStartEvent;
+    public delegate void CampaignFinish();
+    public static event CampaignFinish onCampaignFinishEvent;
+    public delegate void ChangeGameState(BattleSystem.State newState, BattleSystem.State prevState);
     public static event ChangeGameState onChangeGameStateEvent;
 
     public delegate void EnemyAttackPlayer(Damage damage);
@@ -19,8 +25,15 @@ public class EventManager : MonoBehaviour
     public static event PlayerDamaged onPlayerDamagedEvent;
     public delegate void PlayerDead();
     public static event PlayerDead onPlayerDeadEvent;
-    public delegate void LevelFinish();
-    public static event LevelFinish onLevelFinishEvent;
+
+    public delegate void EnemyUnitStartMove(UnitBase unit);
+    public static event EnemyUnitStartMove onEnemyUnitStartMoveEvent;
+    public delegate void EnemyUnitEndMove(UnitBase unit);
+    public static event EnemyUnitEndMove onEnemyUnitEndMoveEvent;
+    public delegate void EnemyUnitDead(UnitBase unit);
+    public static event EnemyUnitDead onEnemyUnitDeadEvent;
+
+    
 
     private void Awake()
     {
@@ -39,9 +52,24 @@ public class EventManager : MonoBehaviour
         onLevelStartEvent?.Invoke(levelID);
     }
 
-    public void OnChangeGameState(BattleSystem.State newState)
+    public void OnLevelFinish()
     {
-        onChangeGameStateEvent?.Invoke(newState);
+        onLevelFinishEvent?.Invoke();
+    }
+
+    public void OnCampaignStart(int campaignID)
+    {
+        onCampaignStartEvent?.Invoke(campaignID);
+    }
+
+    public void OnCampaignFinish()
+    {
+        onCampaignFinishEvent?.Invoke();
+    }
+
+    public void OnChangeGameState(BattleSystem.State newState, BattleSystem.State prevState)
+    {
+        onChangeGameStateEvent?.Invoke(newState, prevState);
     }
 
     public void OnEnemyAttackPlayer(Damage damage)
@@ -69,8 +97,20 @@ public class EventManager : MonoBehaviour
         onPlayerDeadEvent?.Invoke();
     }
 
-    public void OnLevelFinish()
+    public void OnEnemyUnitStartMove(UnitBase unit)
     {
-        onLevelFinishEvent?.Invoke();
+        onEnemyUnitStartMoveEvent?.Invoke(unit);
     }
+
+    public void OnEnemyUnitEndMove(UnitBase unit)
+    {
+        onEnemyUnitEndMoveEvent?.Invoke(unit);
+    }
+
+    public void OnEnemyUnitDead(UnitBase unit)
+    {
+        onEnemyUnitDeadEvent?.Invoke(unit);
+    }
+
+   
 }

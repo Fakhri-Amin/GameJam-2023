@@ -6,6 +6,7 @@ using UnityEngine;
 
 public abstract class UnitBase : MonoBehaviour, IDamageable, IMove, IAttack
 {
+    public string UnitId;
     [field: SerializeField] public float MaxHealth { get; set; } = 10f;
     [field: SerializeField] public float CrashDamage { get; set; } = 10f;
     [field: SerializeField] public int xSize { get; set; } = 1;
@@ -34,6 +35,11 @@ public abstract class UnitBase : MonoBehaviour, IDamageable, IMove, IAttack
         PassiveSkill();
     }
 
+    public void InstantiateUnit(CampaignTilesScript newTilesScript)
+    {
+
+    }
+
     public virtual void UnitStart()
     {
 
@@ -58,15 +64,21 @@ public abstract class UnitBase : MonoBehaviour, IDamageable, IMove, IAttack
 
     public virtual void Die()
     {
-        EnemySpawnManager.instance.RemoveUnit(this);
-        UnitBattleHandler.Instance.RemoveUnitFromUnitList(this);
+        EventManager.instance.OnEnemyUnitDead(this);
+        //UnitBattleHandler.Instance.RemoveUnitFromUnitList(this);
         Destroy(gameObject);
+    }
+
+    public void StartUnitTurn()
+    {
+        StartCoroutine(Move(Vector2.left));
+        Attack();
     }
 
     public IEnumerator Move(Vector2 direction)
     {
         BeforeUnitTurn();
-        EnemySpawnManager.instance.RemoveUnit(this);
+        EventManager.instance.OnEnemyUnitStartMove(this);
         float elapsedTime = 0f;
         CurrentPosition = transform.position;
         TargetPosition = direction + CurrentPosition;
@@ -79,7 +91,7 @@ public abstract class UnitBase : MonoBehaviour, IDamageable, IMove, IAttack
         }
 
         transform.position = TargetPosition;
-        EnemySpawnManager.instance.MoveUnit(this);
+        EventManager.instance.OnEnemyUnitEndMove(this);
         AfterUnitTurn();
     }
 

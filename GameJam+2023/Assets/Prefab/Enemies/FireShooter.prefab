@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d21708446bc70f43ab497de88c40cd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UnitId: FireShooter
   <MaxHealth>k__BackingField: 25
   <CrashDamage>k__BackingField: 10
   <xSize>k__BackingField: 1

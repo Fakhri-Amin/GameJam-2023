@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class EnemySpawnPool : MonoBehaviour
 {
+    public static EnemySpawnPool instance { get; private set; }
     public bool initializeOnStart = true;
     public List<ObjectPoolConfig> initialPools;
 
@@ -10,8 +11,21 @@ public class EnemySpawnPool : MonoBehaviour
 
     private void Awake()
     {
-        if (initializeOnStart)
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
             InitializePools();
+        }
+    }
+
+    public void UpdatePools(List<ObjectPoolConfig> newPools)
+    {
+        initialPools = newPools;
+        InitializePools();
     }
 
     public void InitializePools()
@@ -46,6 +60,7 @@ public class EnemySpawnPool : MonoBehaviour
             newObject.SetActive(false);
             newPool.pooledObject.Add(newObject);
         }
+        Debug.Log("CreateNewPool" + config.id);
         runtimePools.Add(config.id, newPool);
     }
 

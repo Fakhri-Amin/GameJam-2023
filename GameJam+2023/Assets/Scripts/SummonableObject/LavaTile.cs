@@ -6,10 +6,11 @@ public class LavaTile : MonoBehaviour
     public int activeDuration;
 
     int remainingDuration;
+    CampaignTilesScript tilesScript;
 
     private void Awake()
     {
-        InstantiateTile();
+
     }
 
     private void Start()
@@ -22,13 +23,14 @@ public class LavaTile : MonoBehaviour
         EventManager.onChangeGameStateEvent -= OnChangeGameState;
     }
 
-    public void InstantiateTile()
+    public void InstantiateTile(CampaignTilesScript newTilesScript)
     {
         remainingDuration = activeDuration;
-        EnemySpawnManager.instance.MoveObject(gameObject);
+        tilesScript = newTilesScript;
+        tilesScript.MoveObject(gameObject);
     }
 
-    public void OnChangeGameState(BattleSystem.State newState)
+    public void OnChangeGameState(BattleSystem.State newState, BattleSystem.State prevState)
     {
         if (newState == BattleSystem.State.Waiting)
         {
@@ -48,7 +50,7 @@ public class LavaTile : MonoBehaviour
 
     void DeactivateLavaTiles()
     {
-        EnemySpawnManager.instance.RemoveObject(gameObject);
+        tilesScript.RemoveObject(gameObject);
         gameObject.SetActive(false);
     }
 }

@@ -25,7 +25,7 @@ public class UnitBattleHandler : MonoBehaviour
         foreach (UnitBase unitBase in unitList)
         {
             unitPositionList.Add(unitBase.GetUnitPosition());
-            EnemySpawnManager.instance.MoveUnit(unitBase);
+            CampaignManager.instance.GetCurrentCampaign().tilesManager.MoveUnit(unitBase);
         }
         BattleSystem.Instance.OnUnitTurn += BattleSystem_OnUnitTurn;
         EventManager.onEnemyCrashPlayerEvent += OnEnemyCrashPlayer;
@@ -52,12 +52,12 @@ public class UnitBattleHandler : MonoBehaviour
     {
         unitList.Remove(unitBase);
         unitPositionList.Remove(unitBase.GetUnitPosition());
-        EnemySpawnManager.instance.RemoveUnit(unitBase);
+        CampaignManager.instance.GetCurrentCampaign().tilesManager.RemoveUnit(unitBase);
     }
 
     public void AddNewUnit(string unitID)
     {
-        var newUnit = EnemySpawnManager.instance.SpawnNewEnemy(unitID);
+        var newUnit = CampaignManager.instance.GetCurrentCampaign().tilesManager.SpawnNewEnemyRandomPos(unitID);
         unitList.Add(newUnit);
         unitPositionList.Add(newUnit.GetUnitPosition());
     }

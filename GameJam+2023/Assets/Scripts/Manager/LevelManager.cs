@@ -47,7 +47,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public void OnChangeGameState(BattleSystem.State newState)
+    public void OnChangeGameState(BattleSystem.State newState, BattleSystem.State prevState)
     {
         if (newState == BattleSystem.State.PlayerTurn)
         {

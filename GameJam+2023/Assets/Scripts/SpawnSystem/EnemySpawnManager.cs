@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawnManager : MonoBehaviour
+/*public class EnemySpawnManager : MonoBehaviour
 {
     public static EnemySpawnManager instance { get; private set; }
     public EnemySpawnPool spawnPool;
@@ -73,7 +73,7 @@ public class EnemySpawnManager : MonoBehaviour
         int tileSize = movedUnit.xSize * movedUnit.ySize;
         foreach (var tile in tileTransform)
         {
-            /*((Vector2)tile.transform.position - movedUnit.GetUnitPosition()).magnitude < 0.4*/
+            *//*((Vector2)tile.transform.position - movedUnit.GetUnitPosition()).magnitude < 0.4*//*
             if (movedUnit.collider2D.bounds.Contains(tile.transform.position))
             {
                 tile.unitOnTile = movedUnit;
@@ -208,11 +208,11 @@ public class EnemySpawnManager : MonoBehaviour
                     yPosition[j + 1] = tempVar;
                     SwapYpos(j, j + 1);
                 }
-        /*for (int i = 0; i < xSize; i++)
+        *//*for (int i = 0; i < xSize; i++)
             for (int j = 0; j < ySize; j++)
             {
                 Debug.Log("jyo" + tileTransform[i, j].XID + " " + tileTransform[i, j].YID + " " + tileTransform[i, j].transform.position);
-            }*/
+            }*//*
     }
 
     void SwapXpos(int xPos1, int xPos2)
@@ -277,31 +277,4 @@ public class EnemySpawnManager : MonoBehaviour
     }
 }
 
-public class TileTransform
-{
-    public int XID;
-    public int YID;
-    public Transform transform;
-    public UnitBase unitOnTile;
-    public GameObject objectOnTile;
-
-    public int GetXLeft()
-    {
-        return (XID <= 0) ? 0 : XID - 1;
-    }
-
-    public int GetXRight()
-    {
-        return (XID + 1 >= EnemySpawnManager.instance.xTileCount) ? XID : XID + 1;
-    }
-
-    public int GetYDown()
-    {
-        return (YID <= 0) ? 0 : YID - 1;
-    }
-
-    public int GetYUp()
-    {
-        return (YID + 1 >= EnemySpawnManager.instance.yTileCount) ? YID : YID + 1;
-    }
-}
+*/

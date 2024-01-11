@@ -48,7 +48,7 @@ public class PlayerSkillManager : MonoBehaviour
             if (GameInput.Instance.IsOnMouseLeftUpOutsideGameplay() && !GameInput.Instance.IsBasicAttack())
             {
                 Vector2 mousePosition = GameInput.Instance.GetMousePosition();
-                (skillList[GameInput.Instance.CurrentSelectedSkill()] as AimSkill).UseSkill(EnemySpawnManager.instance.GetNearestTile(mousePosition));
+                (skillList[GameInput.Instance.CurrentSelectedSkill()] as AimSkill).UseSkill(CampaignManager.instance.GetCurrentCampaign().tilesManager.GetNearestTile(mousePosition));
             }
         }
     }
@@ -62,7 +62,7 @@ public class PlayerSkillManager : MonoBehaviour
         }
     }
 
-    public void OnChangeGameState(BattleSystem.State newState)
+    public void OnChangeGameState(BattleSystem.State newState, BattleSystem.State prevState)
     {
         if (newState == BattleSystem.State.PlayerTurn)
         {

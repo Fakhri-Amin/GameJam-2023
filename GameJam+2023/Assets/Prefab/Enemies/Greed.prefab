@@ -413,6 +413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88c4fc9c5cc71bd4da5d157d4419f91a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UnitId: Greed
   <MaxHealth>k__BackingField: 80
   <CrashDamage>k__BackingField: 20
   <xSize>k__BackingField: 2
