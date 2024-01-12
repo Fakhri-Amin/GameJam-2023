@@ -9,9 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4215337646053940217}
-  - component: {fileID: 2245111751060012805}
   - component: {fileID: 112860444281254978}
-  - component: {fileID: 2860672772849737254}
   m_Layer: 0
   m_Name: EnemySpawner
   m_TagString: Untagged
@@ -34,44 +32,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2245111751060012805
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5800923437222977832}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d728f8a062b67e48b1e9dad4840a0b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelList:
-  - levelID: 0
-    initializeUnit:
-    - unitID: burntface
-      count: 3
-    - unitID: burger
-      count: 3
-    - unitID: shooter
-      count: 1
-    - unitID: furious
-      count: 1
-    reinforcementUnit:
-    - unitID: burger
-      count: 5
-    - unitID: burntface
-      count: 5
-    - unitID: shooter
-      count: 3
-    - unitID: greed
-      count: 1
-    - unitID: burntinside
-      count: 4
-    - unitID: furious
-      count: 5
-    - unitID: number1killer
-      count: 4
 --- !u!114 &112860444281254978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,45 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4340b791fc339eb44b307ad9f96225c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initializeOnStart: 1
-  initialPools:
-  - id: burger
-    prefab: {fileID: 559091286090423660, guid: f20641b1af35051468eb89476ff439d6, type: 3}
-    initialCount: 0
-  - id: shooter
-    prefab: {fileID: 559091286090423660, guid: 9eaf14d5337c68e469c0b9f60ede3ec5, type: 3}
-    initialCount: 0
-  - id: greed
-    prefab: {fileID: 5014044501114567941, guid: cfbc9e1a9849d4241ba0c2ece68ab5d1, type: 3}
-    initialCount: 0
-  - id: number1killer
-    prefab: {fileID: 8995647651510571481, guid: 5a8b1cc249316164498a29ae6978b962, type: 3}
-    initialCount: 0
-  - id: burntface
-    prefab: {fileID: 6625923317574196389, guid: e9c3b4cb9d578c04e96b6b4fe66111e3, type: 3}
-    initialCount: 0
-  - id: burntinside
-    prefab: {fileID: 6837188512422167137, guid: 31c0ca09daca6b44cbd5aebf8206288f, type: 3}
-    initialCount: 0
-  - id: furious
-    prefab: {fileID: 948466751070248076, guid: 690cf2211c657874d8d0ecb38a7d0813, type: 3}
-    initialCount: 0
---- !u!114 &2860672772849737254
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5800923437222977832}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b5774f387af142488aa534e5d254f4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnPool: {fileID: 112860444281254978}
-  unitParent: {fileID: 0}
-  tilesParentList:
-  - {fileID: 0}
-  - {fileID: 0}
-  xTileCount: 12
-  yTileCount: 8
+  initializeOnStart: 0
+  initialPools: []

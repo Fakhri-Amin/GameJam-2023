@@ -131,14 +131,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 112860444281254978, guid: 88254f2adaa24b343820278a045cd787, type: 3}
-      propertyPath: initializeOnStart
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 112860444281254978, guid: 88254f2adaa24b343820278a045cd787, type: 3}
-      propertyPath: initialPools.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2245111751060012805, guid: 88254f2adaa24b343820278a045cd787, type: 3}
       propertyPath: levelList.Array.size
       value: 0
