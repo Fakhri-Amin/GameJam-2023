@@ -5,5 +5,6 @@ using UnityEngine;
 public class CampaignSO : ScriptableObject
 {
     public List<LevelSO> levelDatas;
-
+    public List<UpgradePartScript> availableUpgradePart;
+    public List<UpgradePartScript> initialUpgradePart;
 }

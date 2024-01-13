@@ -6,12 +6,12 @@ public class PlayerSkillManager : MonoBehaviour
 {
     public HealSkillScript healSkill;
     public ExplosionScript explosionSkill;
-    List<SkillScript> skillList;
+    List<ActiveSkill> skillList;
     bool isPlayerTurn;
 
     private void Awake()
     {
-        skillList = new List<SkillScript>();
+        skillList = new List<ActiveSkill>();
         healSkill.skillID = skillList.Count;
         skillList.Add(healSkill);
         explosionSkill.skillID = skillList.Count;
@@ -76,9 +76,11 @@ public class PlayerSkillManager : MonoBehaviour
 }
 
 [System.Serializable]
-public class SkillScript
+public class ActiveSkill
 {
+    public BaseSkillSO baseSkillSO;
     public string skillName;
+    public int currentSkillLevel;
     public int skillID;
     public int cooldownDuration;
     public float manaCost;
@@ -119,7 +121,7 @@ public class SkillScript
 
 }
 
-public class AimSkill : SkillScript
+public class AimSkill : ActiveSkill
 {
     public override void OnSkillSelect()
     {
@@ -134,7 +136,7 @@ public class AimSkill : SkillScript
 }
 
 [System.Serializable]
-public class HealSkillScript : SkillScript
+public class HealSkillScript : ActiveSkill
 {
     public int healValue;
 

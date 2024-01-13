@@ -32,8 +32,16 @@ public class CampaignManager : MonoBehaviour
 
     void InstantiateCampaign(int campaignNum)
     {
+        if (currentCampaign != null)
+        {
+            Destroy(currentCampaign);
+        }
         currentCampaign = Instantiate(campaignPrefab[campaignNum].gameObject, transform).GetComponent<CampaignScript>();
         currentCampaign.InstantiateCampaign();
+        foreach (var upgradePart in currentCampaign.campaignData.initialUpgradePart)
+        {
+            PlayerManager.instance.AddUpgradePart(upgradePart);
+        }
         EventManager.instance.OnCampaignStart(campaignNum);
     }
 

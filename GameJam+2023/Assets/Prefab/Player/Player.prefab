@@ -1,5 +1,82 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &201807070652783211
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5797627907487247915}
+  - component: {fileID: 1681677932228285829}
+  - component: {fileID: 7776452500739323695}
+  m_Layer: 0
+  m_Name: NewScaling
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5797627907487247915
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201807070652783211}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.42569995, y: 0.11610012, z: 0}
+  m_LocalScale: {x: 0.172, y: 0.172, z: 0.172}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8801283027931752799}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1681677932228285829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201807070652783211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e6389e36546134ea42bd44207cce05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentUpgrade: []
+  upgradePartParent: {fileID: 5797627907487247915}
+--- !u!114 &7776452500739323695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201807070652783211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 887a64e5fc671494bbd8a16d970bf775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healSkill:
+    baseSkillSO: {fileID: 0}
+    skillName: heal
+    currentSkillLevel: 0
+    skillID: 0
+    cooldownDuration: 3
+    manaCost: 0
+    healValue: 20
+  explosionSkill:
+    baseSkillSO: {fileID: 0}
+    skillName: explosion
+    currentSkillLevel: 0
+    skillID: 1
+    cooldownDuration: 3
+    manaCost: 0
+    damageValue: 5
+    xSize: 3
+    ySize: 3
 --- !u!1 &1318672846426379516
 GameObject:
   m_ObjectHideFlags: 0
@@ -16,7 +93,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4849551899802520037
 Transform:
   m_ObjectHideFlags: 0
@@ -283,6 +360,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4849551899802520037}
+  - {fileID: 5797627907487247915}
   m_Father: {fileID: 6877143927321126455}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5788014260354354216
@@ -301,7 +379,7 @@ GameObject:
   - component: {fileID: 6045693499542178890}
   - component: {fileID: 2220302044386116844}
   - component: {fileID: 6100734107416585792}
-  - component: {fileID: 466517384021564678}
+  - component: {fileID: 2415457794186646695}
   m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
@@ -335,7 +413,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5788014260354354216}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7dc141a0e7ee514ea2be93e71068bae, type: 3}
+  m_Script: {fileID: 11500000, guid: 32a3f9a149526e14386d4ec21731e80e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   timeToMove: 0.2
@@ -348,7 +426,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5788014260354354216}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2119ce943deacd449dc743b44f441ef, type: 3}
+  m_Script: {fileID: 11500000, guid: 5537f5f7ecbf3f44ba098d6bd3a693be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   objectRotation: {fileID: 3542166731565323298}
@@ -356,7 +434,7 @@ MonoBehaviour:
   timeBetweenShot: 0.08
   layermask:
     serializedVersion: 2
-    m_Bits: 115
+    m_Bits: 65
   minMaxAngle: {x: -90, y: 90}
   lineRenderer: {fileID: 3884366491693322657}
 --- !u!114 &4550034910142559455
@@ -466,7 +544,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &466517384021564678
+--- !u!114 &2415457794186646695
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -475,18 +553,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 5788014260354354216}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 887a64e5fc671494bbd8a16d970bf775, type: 3}
+  m_Script: {fileID: 11500000, guid: 801d66ecc7a512a49915c343a0b69b89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healSkill:
-    skillName: heal
-    skillID: 0
-    cooldownDuration: 3
-    healValue: 20
-  explosionSkill:
-    skillName: explosion
-    skillID: 1
-    cooldownDuration: 3
-    damageValue: 5
-    xSize: 3
-    ySize: 3
+  upgradeManager: {fileID: 1681677932228285829}
+  skillManager: {fileID: 7776452500739323695}
