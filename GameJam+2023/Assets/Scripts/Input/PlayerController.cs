@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : BasePlayerInput
 {
     [SerializeField] private float timeToMove = 0.2f;
 
@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (BattleSystem.Instance.IsPlayerTurn())
+        if (BattleSystem.Instance.IsPlayerTurn() && IsInputEnable())
         {
             Vector2 moveInput = GameInput.Instance.GetMovementVectorNormalized();
             if (moveInput != Vector2.zero && !isMoving) StartCoroutine(Move(moveInput));
@@ -44,4 +44,6 @@ public class PlayerController : MonoBehaviour
 
         isMoving = false;
     }
+
+    
 }

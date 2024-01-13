@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: WaveSO1-2-3
   m_EditorClassIdentifier: 
   spawnDatas:
-  - monsterPrefab: {fileID: 3464883473947729101, guid: 96b74aca885467a45a4b55f50a170ba9, type: 3}
+  - monsterPrefab: {fileID: 7439471059684788516, guid: 735855f0906d65b46bb4903b0e5f3d8b, type: 3}
     spawnlocationX: 10
     spawnlocationY: 4
-  - monsterPrefab: {fileID: 3464883473947729101, guid: 96b74aca885467a45a4b55f50a170ba9, type: 3}
+  - monsterPrefab: {fileID: 7439471059684788516, guid: 735855f0906d65b46bb4903b0e5f3d8b, type: 3}
     spawnlocationX: 10
     spawnlocationY: 5

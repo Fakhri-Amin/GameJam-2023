@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAimAndShoot : MonoBehaviour
+public class PlayerAimAndShoot : BasePlayerInput
 {
     [SerializeField] private Transform objectRotation;
 
@@ -27,13 +27,15 @@ public class PlayerAimAndShoot : MonoBehaviour
         dotsProjectileLine = GetComponent<DotsProjectileLine>();
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         BattleSystem.Instance.OnPlayerTurn += BattleSystem_OnPlayerTurn;
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         BattleSystem.Instance.OnPlayerTurn -= BattleSystem_OnPlayerTurn;
     }
 
@@ -42,7 +44,7 @@ public class PlayerAimAndShoot : MonoBehaviour
         HandleRotation();
 
         // Handle Shooting
-        if (GameInput.Instance.IsOnMouseLeftUpGameplay() && GameInput.Instance.IsBasicAttack())
+        if (GameInput.Instance.IsOnMouseLeftUpGameplay() && GameInput.Instance.IsBasicAttack() && IsInputEnable())
         {
             onActionComplete();
             StartCoroutine(Shoot());
@@ -51,7 +53,7 @@ public class PlayerAimAndShoot : MonoBehaviour
 
     private void HandleRotation()
     {
-        if (GameInput.Instance.IsOnMouseLeftBeingPressedGameplay() && GameInput.Instance.IsBasicAttack())
+        if (GameInput.Instance.IsOnMouseLeftBeingPressedGameplay() && GameInput.Instance.IsBasicAttack() && IsInputEnable())
         {
             lineRenderer.enabled = true;
 
