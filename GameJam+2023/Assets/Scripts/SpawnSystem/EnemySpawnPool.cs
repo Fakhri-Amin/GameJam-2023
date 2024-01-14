@@ -60,7 +60,7 @@ public class EnemySpawnPool : MonoBehaviour
             newObject.SetActive(false);
             newPool.pooledObject.Add(newObject);
         }
-        Debug.Log("CreateNewPool" + config.id);
+        //Debug.Log("CreateNewPool" + config.id);
         runtimePools.Add(config.id, newPool);
     }
 

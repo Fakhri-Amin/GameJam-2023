@@ -6,12 +6,11 @@ public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance;
     PlayerController moveController;
-    PlayerAimAndShoot shootController;
+    [HideInInspector]
+    public PlayerAimAndShoot shootController { get; private set; }
     PlayerScript playerStats;
-    [SerializeField]
-    PlayerUpgradeManager upgradeManager;
-    [SerializeField]
-    PlayerSkillManager skillManager;
+    public PlayerUpgradeManager upgradeManager;
+    public PlayerSkillManager skillManager;
 
     private void Awake()
     {
@@ -25,14 +24,14 @@ public class PlayerManager : MonoBehaviour
             moveController = GetComponent<PlayerController>();
             shootController = GetComponent<PlayerAimAndShoot>();
             playerStats = GetComponent<PlayerScript>();
+            skillManager.playerManager = this;
         }
     }
 
     public void AddUpgradePart(UpgradePartScript newUpgrade)
     {
-        upgradeManager.AddUpgradePart(newUpgrade, skillManager);
+        upgradeManager.AddUpgradePart(newUpgrade, this);
     }
-
 
 
 }

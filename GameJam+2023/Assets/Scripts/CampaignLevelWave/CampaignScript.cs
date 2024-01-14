@@ -61,13 +61,13 @@ public class CampaignScript : MonoBehaviour
                     bool foundUnit = false;
                     foreach (var poolUnit in initialPools)
                     {
-                        Debug.Log("Is same?" + poolUnit.id + "and" + config.unitID);
+                        //Debug.Log("Is same?" + poolUnit.id + "and" + config.unitID);
                         if (poolUnit.id == config.unitID)
                         {
                             foundUnit = true;
                             if (poolUnit.initialCount < config.unitCount)
                             {
-                                Debug.Log("Add initialCount " + config.unitCount);
+                                //Debug.Log("Add initialCount " + config.unitCount);
                                 poolUnit.initialCount = config.unitCount;
                             }
                             break;
@@ -75,7 +75,7 @@ public class CampaignScript : MonoBehaviour
                     }
                     if (!foundUnit)
                     {
-                        Debug.Log("Add new " + config.unitID);
+                        //Debug.Log("Add new " + config.unitID);
                         initialPools.Add(new ObjectPoolConfig() { id = config.unitID, prefab = config.prefab, initialCount = config.unitCount });
                     }
                 }
@@ -130,6 +130,7 @@ public class CampaignScript : MonoBehaviour
     {
         if (campaignData.levelDatas.Count > currentLevel + 1)
         {
+            UIManager.instance.upgradePanel.InstantiateUpgradeChoice(campaignData.Get3RandomUpgrade(PlayerManager.instance.upgradeManager));
             StartNewLevel(currentLevel + 1);
         }
         else

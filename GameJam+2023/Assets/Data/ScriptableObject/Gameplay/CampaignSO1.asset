@@ -15,3 +15,16 @@ MonoBehaviour:
   levelDatas:
   - {fileID: 11400000, guid: 69bb678c2dcfb51499368901f6ec3ac8, type: 2}
   - {fileID: 11400000, guid: da5bbf324158a5f4b84657a22d645f2f, type: 2}
+  - {fileID: 11400000, guid: 1e1b6d0c2c791b74ca6cdf94eac396f4, type: 2}
+  availableUpgradePart:
+  - {fileID: 5183750047191016684, guid: e83e0da95f900784f868f1ca4e0bf2b3, type: 3}
+  - {fileID: 6507722941586115947, guid: c0b21a89e06aef548846bde2a9c04870, type: 3}
+  - {fileID: 9215555507445384436, guid: 0dd634d8f28c791428196c48a8e7377a, type: 3}
+  - {fileID: 2417691156418619375, guid: 1238ee8aaf72c0447acead2edd1d6441, type: 3}
+  - {fileID: 3293199152174103944, guid: 173c536823f7f374eae42e31218136f2, type: 3}
+  - {fileID: 2574161878310345122, guid: e080c2f4e7af7394992c31a949776f48, type: 3}
+  - {fileID: 1942278495971572199, guid: d8c91ea9a238ad94d964fde9e61b2a1d, type: 3}
+  initialUpgradePart:
+  - {fileID: 5183750047191016684, guid: e83e0da95f900784f868f1ca4e0bf2b3, type: 3}
+  - {fileID: 6507722941586115947, guid: c0b21a89e06aef548846bde2a9c04870, type: 3}
+  - {fileID: 2417691156418619375, guid: 1238ee8aaf72c0447acead2edd1d6441, type: 3}

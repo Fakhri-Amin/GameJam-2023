@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 201807070652783211}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.42569995, y: 0.11610012, z: 0}
+  m_LocalPosition: {x: -0.211, y: 0.11610012, z: 0}
   m_LocalScale: {x: 0.172, y: 0.172, z: 0.172}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45e6389e36546134ea42bd44207cce05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentUpgrade: []
+  currentUpgradeList: []
   upgradePartParent: {fileID: 5797627907487247915}
 --- !u!114 &7776452500739323695
 MonoBehaviour:
@@ -59,24 +59,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 887a64e5fc671494bbd8a16d970bf775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healSkill:
-    baseSkillSO: {fileID: 0}
-    skillName: heal
-    currentSkillLevel: 0
-    skillID: 0
-    cooldownDuration: 3
-    manaCost: 0
-    healValue: 20
-  explosionSkill:
-    baseSkillSO: {fileID: 0}
-    skillName: explosion
-    currentSkillLevel: 0
-    skillID: 1
-    cooldownDuration: 3
-    manaCost: 0
-    damageValue: 5
-    xSize: 3
-    ySize: 3
 --- !u!1 &1318672846426379516
 GameObject:
   m_ObjectHideFlags: 0

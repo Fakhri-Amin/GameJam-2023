@@ -7,7 +7,7 @@ public class PlayerUpgradeManager : MonoBehaviour
     public List<UpgradePartScript> currentUpgradeList;
     public Transform upgradePartParent;
 
-    public void AddUpgradePart(UpgradePartScript newUpgrade, PlayerSkillManager skillManager)
+    public void AddUpgradePart(UpgradePartScript newUpgrade, PlayerManager player)
     {
         bool foundSamePart = false;
         UpgradePartScript sameSlotPart = null;
@@ -27,11 +27,11 @@ public class PlayerUpgradeManager : MonoBehaviour
         {
             if (sameSlotPart != null)
             {
-                sameSlotPart.RemovePart(skillManager);
+                sameSlotPart.RemovePart(player);
                 Destroy(sameSlotPart);
             }
             var newPart = Instantiate(newUpgrade.gameObject, upgradePartParent).GetComponent<UpgradePartScript>();
-            newPart.InstantiatePart(skillManager);
+            newPart.InstantiatePart(player);
             currentUpgradeList.Add(newPart);
         }
     }

@@ -9,6 +9,18 @@ public class PlayerAimAndShoot : BasePlayerInput
 
     [Header("Bullet Stats")]
     [SerializeField] private int bulletCount;
+    private int extraBulletCount = 0;
+    public int ExtraBulletCount
+    {
+        get { return extraBulletCount; }
+        set { extraBulletCount = value; TotalBulletCount = bulletCount + extraBulletCount; }
+    }
+    int totalBulletCount;
+    public int TotalBulletCount
+    {
+        get { return totalBulletCount; }
+        set { totalBulletCount = value; UIManager.instance.playerStats.UpdateBulletCount(totalBulletCount); }
+    }
     [SerializeField] private float timeBetweenShot = 0.08f;
 
     [Header("Projectile Line")]
@@ -86,7 +98,7 @@ public class PlayerAimAndShoot : BasePlayerInput
 
     private IEnumerator Shoot()
     {
-        for (int i = 0; i < bulletCount; i++)
+        for (int i = 0; i < TotalBulletCount; i++)
         {
             // Instantiate(bulletPrefab, bulletSpawnPoint.position, transform.rotation);
             GameObject bullet = ObjectPool.Instance.GetPooledObject();
@@ -102,8 +114,4 @@ public class PlayerAimAndShoot : BasePlayerInput
         }
     }
 
-    public int GetBulletCount()
-    {
-        return bulletCount;
-    }
 }

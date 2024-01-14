@@ -99,3 +99,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partEnum: 6
   SkillPart: {fileID: 0}
+  upgradeName: 
+  upgradeSprite: {fileID: 21300000, guid: 54f074edb5a21874fa3f18a5d98b2e53, type: 3}
+  upgradeDescription: 

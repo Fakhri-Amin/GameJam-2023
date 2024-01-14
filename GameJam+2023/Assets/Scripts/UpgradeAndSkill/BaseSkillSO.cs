@@ -4,18 +4,23 @@ public abstract class BaseSkillSO : ScriptableObject
 {
     public string SkillID;
 
-    public virtual void OnSkillAdded()
+    public virtual void OnSkillStart(PlayerManager player)
     {
 
     }
 
-    public virtual void OnSkillRemoved()
+    public virtual void OnSkillEnd(PlayerManager player)
     {
 
     }
 
-    public virtual void OnSkillUpdateLevel(int newLevel)
+    public virtual void OnSkillUpdateLevel(PlayerManager player, int newLevel)
     {
 
+    }
+
+    public virtual SkillScript GetSkillScript()
+    {
+        return null;
     }
 }

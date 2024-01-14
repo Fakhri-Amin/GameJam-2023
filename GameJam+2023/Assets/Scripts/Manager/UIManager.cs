@@ -5,6 +5,7 @@ public class UIManager : MonoBehaviour
     public static UIManager instance;
     public UIPlayerStats playerStats;
     public UIPlayerSkills playerSkills;
+    public UIUpgradePanel upgradePanel;
 
     public GameObject WinCutscene;
     public GameObject LoseCutscene;

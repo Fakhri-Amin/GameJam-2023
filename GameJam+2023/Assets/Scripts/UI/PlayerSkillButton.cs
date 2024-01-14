@@ -9,8 +9,8 @@ public class PlayerSkillButton : MonoBehaviour
     public Image skillImage;
     public Button button;
 
-    ActiveSkill skillScript;
-    public void InstantiateButton(ActiveSkill newSkill)
+    ActiveSkillScript skillScript;
+    public void InstantiateButton(ActiveSkillScript newSkill)
     {
         skillScript = newSkill;
     }

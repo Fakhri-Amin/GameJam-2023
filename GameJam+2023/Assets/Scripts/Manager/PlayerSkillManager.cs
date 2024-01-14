@@ -4,25 +4,27 @@ using UnityEngine;
 
 public class PlayerSkillManager : MonoBehaviour
 {
-    public HealSkillScript healSkill;
-    public ExplosionScript explosionSkill;
-    List<ActiveSkill> skillList;
+    /*public HealSkillScript healSkill;
+    public ExplosionScript explosionSkill;*/
+    [HideInInspector]
+    public PlayerManager playerManager { private get; set; }
+    List<SkillScript> skillList;
     bool isPlayerTurn;
 
     private void Awake()
     {
-        skillList = new List<ActiveSkill>();
-        healSkill.skillID = skillList.Count;
+        skillList = new List<SkillScript>();
+        /*healSkill.skillID = skillList.Count;
         skillList.Add(healSkill);
         explosionSkill.skillID = skillList.Count;
-        skillList.Add(explosionSkill);
+        skillList.Add(explosionSkill);*/
     }
 
     private void Start()
     {
         EventManager.onChangeGameStateEvent += OnChangeGameState;
         EventManager.onLevelStartEvent += OnLevelStart;
-        foreach (var skill in skillList)
+        /*foreach (var skill in skillList)
         {
             foreach (var skillButton in UIManager.instance.playerSkills.playerSkills)
             {
@@ -33,7 +35,7 @@ public class PlayerSkillManager : MonoBehaviour
                     break;
                 }
             }
-        }
+        }*/
     }
 
     private void OnDestroy()
@@ -48,8 +50,41 @@ public class PlayerSkillManager : MonoBehaviour
             if (GameInput.Instance.IsOnMouseLeftUpOutsideGameplay() && !GameInput.Instance.IsBasicAttack())
             {
                 Vector2 mousePosition = GameInput.Instance.GetMousePosition();
-                (skillList[GameInput.Instance.CurrentSelectedSkill()] as AimSkill).UseSkill(CampaignManager.instance.GetCurrentCampaign().tilesManager.GetNearestTile(mousePosition));
+                //(skillList[GameInput.Instance.CurrentSelectedSkill()] as AimSkill).UseSkill(CampaignManager.instance.GetCurrentCampaign().tilesManager.GetNearestTile(mousePosition));
             }
+        }
+    }
+
+    public void AddSkill(PlayerManager player, SkillScript newSkill)
+    {
+        foreach (var skill in skillList)
+        {
+            if (skill.baseSkillSO == newSkill.baseSkillSO)
+            {
+                skill.SkillUpgrade(player);
+                return;
+            }
+        }
+        skillList.Add(newSkill);
+        newSkill.StartSkill(playerManager);
+    }
+
+    public void RemoveSkill(PlayerManager player, BaseSkillSO SkillSO)
+    {
+        SkillScript removedSkill = null;
+        foreach (var skill in skillList)
+        {
+            if (skill.baseSkillSO == SkillSO)
+            {
+                skill.SkillDowngrade(player);
+                removedSkill = skill;
+                break;
+            }
+        }
+        if (removedSkill != null && removedSkill.currentSkillLevel < 1)
+        {
+            removedSkill.EndSkill(playerManager);
+            skillList.Remove(removedSkill);
         }
     }
 
@@ -58,7 +93,7 @@ public class PlayerSkillManager : MonoBehaviour
     {
         foreach (var skill in skillList)
         {
-            skill.Instantiate();
+           
         }
     }
 
@@ -75,21 +110,64 @@ public class PlayerSkillManager : MonoBehaviour
     }
 }
 
-[System.Serializable]
-public class ActiveSkill
+public class SkillScript
 {
     public BaseSkillSO baseSkillSO;
-    public string skillName;
-    public int currentSkillLevel;
-    public int skillID;
+    public int currentSkillLevel = 1;
+
+    public virtual void StartSkill(PlayerManager player)
+    {
+        Debug.Log("StartSkill" + baseSkillSO.name);
+        baseSkillSO.OnSkillStart(player);
+        baseSkillSO.OnSkillUpdateLevel(player, currentSkillLevel);
+    }
+
+    public virtual void SkillUpgrade(PlayerManager player)
+    {
+        Debug.Log("SkillUpgrade" + baseSkillSO.name);
+        currentSkillLevel++;
+        baseSkillSO.OnSkillUpdateLevel(player, currentSkillLevel);
+    }
+
+    public virtual void SkillDowngrade(PlayerManager player)
+    {
+        Debug.Log("SkillDowngrade" + baseSkillSO.name);
+        currentSkillLevel--;
+        baseSkillSO.OnSkillUpdateLevel(player, currentSkillLevel);
+    }
+
+    public virtual void TurnPass()
+    {
+
+    }
+
+    public virtual void EndSkill(PlayerManager player)
+    {
+        Debug.Log("EndSkill" + baseSkillSO.name);
+        baseSkillSO.OnSkillEnd(player);
+    }
+
+}
+
+public class PassiveSkillScript : SkillScript
+{
+    public virtual PassiveSkillSO GetPassiveSkillSO()
+    {
+        return (baseSkillSO as PassiveSkillSO);
+    }
+}
+
+public class ActiveSkillScript : SkillScript
+{
     public int cooldownDuration;
     public float manaCost;
 
     int cooldownRemaining;
     PlayerSkillButton skillButton;
 
-    public virtual void Instantiate()
+    public override void StartSkill(PlayerManager player)
     {
+        base.StartSkill(player);
         UpdateCooldown(cooldownDuration);
     }
 
@@ -108,7 +186,7 @@ public class ActiveSkill
         UpdateCooldown(0);
     }
 
-    public void TurnPass()
+    public override void TurnPass()
     {
         UpdateCooldown(cooldownRemaining + 1);
     }
@@ -121,7 +199,7 @@ public class ActiveSkill
 
 }
 
-public class AimSkill : ActiveSkill
+/*public class AimSkill : ActiveSkill
 {
     public override void OnSkillSelect()
     {
@@ -183,4 +261,4 @@ public class ExplosionScript : AimSkill
         base.UseSkill(tile);
         OnSkillUse();
     }
-}
+}*/
