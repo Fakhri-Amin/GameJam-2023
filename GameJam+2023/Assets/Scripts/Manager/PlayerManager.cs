@@ -11,6 +11,7 @@ public class PlayerManager : MonoBehaviour
     PlayerScript playerStats;
     public PlayerUpgradeManager upgradeManager;
     public PlayerSkillManager skillManager;
+    public Transform attackParent;
 
     private void Awake()
     {

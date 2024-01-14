@@ -8,14 +8,12 @@ public abstract class BasePlayerInput : MonoBehaviour
 
     protected virtual void Start()
     {
-        EventManager.onDisableInputEvent += AddInputDisable;
-        EventManager.onEnableInputEvent += DecInputDisable;
+        EventManager.onDisableInputEvent += InputDisable;
     }
 
     protected virtual void OnDestroy()
     {
-        EventManager.onDisableInputEvent -= AddInputDisable;
-        EventManager.onEnableInputEvent -= DecInputDisable;
+        EventManager.onDisableInputEvent -= InputDisable;
     }
 
     protected bool IsInputEnable()
@@ -23,13 +21,11 @@ public abstract class BasePlayerInput : MonoBehaviour
         return inputDisable <= 0;
     }
 
-    void AddInputDisable()
+    void InputDisable(bool disableInput)
     {
-        inputDisable++;
-    }
-
-    void DecInputDisable()
-    {
-        inputDisable--;
+        if (disableInput)
+            inputDisable++;
+        else
+            inputDisable--;
     }
 }

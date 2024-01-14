@@ -85,6 +85,11 @@ public class CampaignScript : MonoBehaviour
         StartNewLevel(0);
     }
 
+    public void AfterSkillAttack()
+    {
+        activeLevel.AfterSkillAttack();
+    }
+
     void StartNewLevel(int levelNum)
     {
         currentLevel = levelNum;
@@ -190,6 +195,14 @@ public class ActiveLevel
             unitBase.StartUnitTurn();
         }
         onActionComplete();
+    }
+
+    public void AfterSkillAttack()
+    {
+        if (IsEmptyUnit())
+        {
+            startNewWave();
+        }
     }
 
     public void OnUnitDead(UnitBase unit)

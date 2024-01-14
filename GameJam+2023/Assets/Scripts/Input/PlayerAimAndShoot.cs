@@ -13,12 +13,12 @@ public class PlayerAimAndShoot : BasePlayerInput
     public int ExtraBulletCount
     {
         get { return extraBulletCount; }
-        set { extraBulletCount = value; TotalBulletCount = bulletCount + extraBulletCount; }
+        set { extraBulletCount = value; }
     }
     int totalBulletCount;
     public int TotalBulletCount
     {
-        get { return totalBulletCount; }
+        get { totalBulletCount = bulletCount + extraBulletCount; return totalBulletCount; }
         set { totalBulletCount = value; UIManager.instance.playerStats.UpdateBulletCount(totalBulletCount); }
     }
     [SerializeField] private float timeBetweenShot = 0.08f;
@@ -102,7 +102,6 @@ public class PlayerAimAndShoot : BasePlayerInput
         {
             // Instantiate(bulletPrefab, bulletSpawnPoint.position, transform.rotation);
             GameObject bullet = ObjectPool.Instance.GetPooledObject();
-
             if (bullet != null)
             {
                 bullet.transform.position = objectRotation.position;

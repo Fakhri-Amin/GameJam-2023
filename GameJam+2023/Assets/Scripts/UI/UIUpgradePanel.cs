@@ -14,7 +14,13 @@ public class UIUpgradePanel : MonoBehaviour
         {
             button.upgradeChoice = this;
         }
-        SetEnable(false);
+    }
+
+    private void Start()
+    {
+        canvasGroup.alpha = 0;
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
     }
 
     public void InstantiateUpgradeChoice(List<UpgradePartScript> upgradePartList)
@@ -31,6 +37,7 @@ public class UIUpgradePanel : MonoBehaviour
         canvasGroup.alpha = (isEnable) ? 1 : 0;
         canvasGroup.interactable = isEnable;
         canvasGroup.blocksRaycasts = isEnable;
+        EventManager.instance.DisableInput(isEnable);
     }
 
 }

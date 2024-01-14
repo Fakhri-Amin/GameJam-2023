@@ -37,7 +37,6 @@ public class BulletDestroyCollider : MonoBehaviour
         {
             other.gameObject.SetActive(false);
             bulletEnterCount--;
-
             if (bulletEnterCount == 0)
             {
                 isAnyBulletLeft = true;

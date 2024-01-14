@@ -157,9 +157,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d27951a04ac46b140bdb1b34252fd917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSkills:
+  playerSkillButtonList:
   - {fileID: 8097664579881987335}
   - {fileID: 870068804037410740}
+  - {fileID: 2867782832371498353}
   cancelButton: {fileID: 0}
 --- !u!1 &478031620857317943
 GameObject:
@@ -1639,7 +1640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 955791ccb6a22934fabc94590944342f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillID: nuke
+  skillName: {fileID: 471191253308315810}
   skillImage: {fileID: 1557996412409709814}
   button: {fileID: 8428939567370191294}
 --- !u!114 &7384649834639674301
@@ -2864,7 +2865,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 955791ccb6a22934fabc94590944342f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillID: heal
+  skillName: {fileID: 0}
   skillImage: {fileID: 8472336116158504899}
   button: {fileID: 2812501765921169858}
 --- !u!1 &4411430308545676227
@@ -3150,7 +3151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 955791ccb6a22934fabc94590944342f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillID: explosion
+  skillName: {fileID: 4326079959541571932}
   skillImage: {fileID: 1993531469122239964}
   button: {fileID: 2221323085538340910}
 --- !u!114 &757324233095075073
@@ -3621,7 +3622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 955791ccb6a22934fabc94590944342f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillID: heal
+  skillName: {fileID: 0}
   skillImage: {fileID: 3718545518387790487}
   button: {fileID: 7016242081963607495}
 --- !u!1 &5639690858796688413
@@ -4871,7 +4872,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 955791ccb6a22934fabc94590944342f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillID: heal
+  skillName: {fileID: 0}
   skillImage: {fileID: 2372760116055483514}
   button: {fileID: 2426427365543450498}
 --- !u!114 &5772492200716084116
@@ -5802,7 +5803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 955791ccb6a22934fabc94590944342f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillID: heal
+  skillName: {fileID: 3739489110063642963}
   skillImage: {fileID: 7595986024035811029}
   button: {fileID: 1431359468256960877}
 --- !u!114 &82098752201343551

@@ -15,10 +15,8 @@ public class EventManager : MonoBehaviour
     public delegate void ChangeGameState(BattleSystem.State newState, BattleSystem.State prevState);
     public static event ChangeGameState onChangeGameStateEvent;
 
-    public delegate void DisableInput();
-    public static event DisableInput onDisableInputEvent;
-    public delegate void EnableInput();
-    public static event EnableInput onEnableInputEvent;
+    public delegate void EnableInput(bool SetDisable);
+    public static event EnableInput onDisableInputEvent;
 
     public delegate void EnemyAttackPlayer(Damage damage);
     public static event EnemyAttackPlayer onEnemyAttackPlayerEvent;
@@ -77,14 +75,9 @@ public class EventManager : MonoBehaviour
         onChangeGameStateEvent?.Invoke(newState, prevState);
     }
 
-    public void OnDisableInput()
+    public void DisableInput(bool SetDisable)
     {
-        onDisableInputEvent?.Invoke();
-    }
-
-    public void OnEnableInput()
-    {
-        onEnableInputEvent?.Invoke();
+        onDisableInputEvent?.Invoke(SetDisable);
     }
 
     public void OnEnemyAttackPlayer(Damage damage)

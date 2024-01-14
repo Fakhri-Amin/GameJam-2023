@@ -8,12 +8,12 @@ public class PlayerSkillManager : MonoBehaviour
     public ExplosionScript explosionSkill;*/
     [HideInInspector]
     public PlayerManager playerManager { private get; set; }
-    List<SkillScript> skillList;
+    List<SkillScript> currentSkillList;
     bool isPlayerTurn;
 
     private void Awake()
     {
-        skillList = new List<SkillScript>();
+        currentSkillList = new List<SkillScript>();
         /*healSkill.skillID = skillList.Count;
         skillList.Add(healSkill);
         explosionSkill.skillID = skillList.Count;
@@ -57,7 +57,7 @@ public class PlayerSkillManager : MonoBehaviour
 
     public void AddSkill(PlayerManager player, SkillScript newSkill)
     {
-        foreach (var skill in skillList)
+        foreach (var skill in currentSkillList)
         {
             if (skill.baseSkillSO == newSkill.baseSkillSO)
             {
@@ -65,14 +65,14 @@ public class PlayerSkillManager : MonoBehaviour
                 return;
             }
         }
-        skillList.Add(newSkill);
+        currentSkillList.Add(newSkill);
         newSkill.StartSkill(playerManager);
     }
 
     public void RemoveSkill(PlayerManager player, BaseSkillSO SkillSO)
     {
         SkillScript removedSkill = null;
-        foreach (var skill in skillList)
+        foreach (var skill in currentSkillList)
         {
             if (skill.baseSkillSO == SkillSO)
             {
@@ -84,14 +84,14 @@ public class PlayerSkillManager : MonoBehaviour
         if (removedSkill != null && removedSkill.currentSkillLevel < 1)
         {
             removedSkill.EndSkill(playerManager);
-            skillList.Remove(removedSkill);
+            currentSkillList.Remove(removedSkill);
         }
     }
 
 
     public void OnLevelStart(int levelID)
     {
-        foreach (var skill in skillList)
+        foreach (var skill in currentSkillList)
         {
            
         }
@@ -101,12 +101,12 @@ public class PlayerSkillManager : MonoBehaviour
     {
         if (newState == BattleSystem.State.PlayerTurn)
         {
-            foreach (var skill in skillList)
+            foreach (var skill in currentSkillList)
             {
                 skill.TurnPass();
             }
         }
-        isPlayerTurn = newState == BattleSystem.State.PlayerTurn;
+        isPlayerTurn = (newState == BattleSystem.State.PlayerTurn);
     }
 }
 
@@ -159,16 +159,20 @@ public class PassiveSkillScript : SkillScript
 
 public class ActiveSkillScript : SkillScript
 {
-    public int cooldownDuration;
-    public float manaCost;
-
     int cooldownRemaining;
     PlayerSkillButton skillButton;
 
     public override void StartSkill(PlayerManager player)
     {
         base.StartSkill(player);
-        UpdateCooldown(cooldownDuration);
+        skillButton = UIManager.instance.playerSkills.AddNewSkill(this);
+        UpdateCooldown(GetActiveSkillSO().cooldownDuration);
+    }
+
+    public override void EndSkill(PlayerManager player)
+    {
+        skillButton.RemoveSkill();
+        base.EndSkill(player);
     }
 
     public void SetButton(PlayerSkillButton newButton)
@@ -176,13 +180,9 @@ public class ActiveSkillScript : SkillScript
         skillButton = newButton;
     }
 
-    public virtual void OnSkillSelect()
+    public virtual void OnSkillUse(PlayerManager player)
     {
-
-    }
-
-    public virtual void OnSkillUse()
-    {
+        GetActiveSkillSO().OnSkillUse(player, this);
         UpdateCooldown(0);
     }
 
@@ -194,9 +194,13 @@ public class ActiveSkillScript : SkillScript
     public void UpdateCooldown(int newValue)
     {
         cooldownRemaining = newValue;
-        if (skillButton) skillButton.UpdateCooldown(cooldownRemaining / cooldownDuration);
+        if (skillButton) skillButton.UpdateCooldown(cooldownRemaining / GetActiveSkillSO().cooldownDuration);
     }
 
+    public ActiveSkillSO GetActiveSkillSO()
+    {
+        return (baseSkillSO as ActiveSkillSO);
+    }
 }
 
 /*public class AimSkill : ActiveSkill

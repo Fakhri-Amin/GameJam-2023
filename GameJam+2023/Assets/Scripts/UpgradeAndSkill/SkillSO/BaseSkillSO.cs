@@ -2,7 +2,7 @@
 
 public abstract class BaseSkillSO : ScriptableObject
 {
-    public string SkillID;
+    public string SkillName;
 
     public virtual void OnSkillStart(PlayerManager player)
     {
