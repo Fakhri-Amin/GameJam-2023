@@ -13,9 +13,24 @@ MonoBehaviour:
   m_Name: WaveSO1-1-3
   m_EditorClassIdentifier: 
   spawnDatas:
-  - monsterPrefab: {fileID: -3468036901981203522, guid: 5a6ba398a25fac84b8f029bb781c68da, type: 3}
-    spawnlocationX: 10
-    spawnlocationY: 4
-  - monsterPrefab: {fileID: -3468036901981203522, guid: 5a6ba398a25fac84b8f029bb781c68da, type: 3}
-    spawnlocationX: 10
+  - monsterPrefab: {fileID: 5695275225106364820, guid: 947ece25d456fff49bdad3b6dbc694a3, type: 3}
+    spawnlocationX: 11
+    spawnlocationY: 2
+  - monsterPrefab: {fileID: 3586288936935159200, guid: d3c15f37b2f478a4db32f764487bc303, type: 3}
+    spawnlocationX: 11
     spawnlocationY: 5
+  - monsterPrefab: {fileID: 3586288936935159200, guid: d3c15f37b2f478a4db32f764487bc303, type: 3}
+    spawnlocationX: 9
+    spawnlocationY: 4
+  - monsterPrefab: {fileID: 3586288936935159200, guid: d3c15f37b2f478a4db32f764487bc303, type: 3}
+    spawnlocationX: 9
+    spawnlocationY: 0
+  - monsterPrefab: {fileID: 3586288936935159200, guid: d3c15f37b2f478a4db32f764487bc303, type: 3}
+    spawnlocationX: 9
+    spawnlocationY: 2
+  - monsterPrefab: {fileID: 3586288936935159200, guid: d3c15f37b2f478a4db32f764487bc303, type: 3}
+    spawnlocationX: 8
+    spawnlocationY: 5
+  - monsterPrefab: {fileID: 3586288936935159200, guid: d3c15f37b2f478a4db32f764487bc303, type: 3}
+    spawnlocationX: 6
+    spawnlocationY: 0

@@ -10,21 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ca96f6e58112ecc4a916c9bb4a5d7775, type: 3}
-  m_Name: WaveSO1-1-1
+  m_Name: WaveSO1-1-5
   m_EditorClassIdentifier: 
   spawnDatas:
+  - monsterPrefab: {fileID: -3468036901981203522, guid: 5a6ba398a25fac84b8f029bb781c68da, type: 3}
+    spawnlocationX: 11
+    spawnlocationY: 5
+  - monsterPrefab: {fileID: 5695275225106364820, guid: 947ece25d456fff49bdad3b6dbc694a3, type: 3}
+    spawnlocationX: 11
+    spawnlocationY: 4
+  - monsterPrefab: {fileID: -3468036901981203522, guid: 5a6ba398a25fac84b8f029bb781c68da, type: 3}
+    spawnlocationX: 11
+    spawnlocationY: 2
   - monsterPrefab: {fileID: 3586288936935159200, guid: d3c15f37b2f478a4db32f764487bc303, type: 3}
     spawnlocationX: 11
+    spawnlocationY: 1
+  - monsterPrefab: {fileID: 3586288936935159200, guid: d3c15f37b2f478a4db32f764487bc303, type: 3}
+    spawnlocationX: 9
     spawnlocationY: 0
-  - monsterPrefab: {fileID: 3586288936935159200, guid: d3c15f37b2f478a4db32f764487bc303, type: 3}
-    spawnlocationX: 11
-    spawnlocationY: 3
   - monsterPrefab: {fileID: 3586288936935159200, guid: d3c15f37b2f478a4db32f764487bc303, type: 3}
     spawnlocationX: 10
     spawnlocationY: 5
   - monsterPrefab: {fileID: 3586288936935159200, guid: d3c15f37b2f478a4db32f764487bc303, type: 3}
-    spawnlocationX: 7
-    spawnlocationY: 5
+    spawnlocationX: 6
+    spawnlocationY: 4
   - monsterPrefab: {fileID: 3586288936935159200, guid: d3c15f37b2f478a4db32f764487bc303, type: 3}
-    spawnlocationX: 8
+    spawnlocationX: 7
     spawnlocationY: 2

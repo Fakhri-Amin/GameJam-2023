@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UnitId: BurgerEnemy
-  <MaxHealth>k__BackingField: 3
+  <MaxHealth>k__BackingField: 10
   <CrashDamage>k__BackingField: 10
   <xSize>k__BackingField: 1
   <ySize>k__BackingField: 1

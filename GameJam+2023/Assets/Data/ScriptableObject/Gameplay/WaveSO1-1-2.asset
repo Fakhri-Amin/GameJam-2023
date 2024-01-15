@@ -15,7 +15,19 @@ MonoBehaviour:
   spawnDatas:
   - monsterPrefab: {fileID: 3586288936935159200, guid: d3c15f37b2f478a4db32f764487bc303, type: 3}
     spawnlocationX: 9
-    spawnlocationY: 4
+    spawnlocationY: 1
   - monsterPrefab: {fileID: 3586288936935159200, guid: d3c15f37b2f478a4db32f764487bc303, type: 3}
     spawnlocationX: 9
-    spawnlocationY: 5
+    spawnlocationY: 3
+  - monsterPrefab: {fileID: 3586288936935159200, guid: d3c15f37b2f478a4db32f764487bc303, type: 3}
+    spawnlocationX: 10
+    spawnlocationY: 7
+  - monsterPrefab: {fileID: 3586288936935159200, guid: d3c15f37b2f478a4db32f764487bc303, type: 3}
+    spawnlocationX: 11
+    spawnlocationY: 4
+  - monsterPrefab: {fileID: 3586288936935159200, guid: d3c15f37b2f478a4db32f764487bc303, type: 3}
+    spawnlocationX: 7
+    spawnlocationY: 6
+  - monsterPrefab: {fileID: 3586288936935159200, guid: d3c15f37b2f478a4db32f764487bc303, type: 3}
+    spawnlocationX: 6
+    spawnlocationY: 2

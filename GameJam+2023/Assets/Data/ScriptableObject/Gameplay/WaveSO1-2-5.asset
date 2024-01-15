@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca96f6e58112ecc4a916c9bb4a5d7775, type: 3}
+  m_Name: WaveSO1-2-5
+  m_EditorClassIdentifier: 
+  spawnDatas:
+  - monsterPrefab: {fileID: 3464883473947729101, guid: 96b74aca885467a45a4b55f50a170ba9, type: 3}
+    spawnlocationX: 10
+    spawnlocationY: 4
+  - monsterPrefab: {fileID: -3468036901981203522, guid: 5a6ba398a25fac84b8f029bb781c68da, type: 3}
+    spawnlocationX: 11
+    spawnlocationY: 0
+  - monsterPrefab: {fileID: -3468036901981203522, guid: 5a6ba398a25fac84b8f029bb781c68da, type: 3}
+    spawnlocationX: 11
+    spawnlocationY: 7
+  - monsterPrefab: {fileID: 2436374897207438662, guid: f7f4b367429469f40814aa74431e9737, type: 3}
+    spawnlocationX: 9
+    spawnlocationY: 6
+  - monsterPrefab: {fileID: 2436374897207438662, guid: f7f4b367429469f40814aa74431e9737, type: 3}
+    spawnlocationX: 9
+    spawnlocationY: 1
+  - monsterPrefab: {fileID: -3468036901981203522, guid: 5a6ba398a25fac84b8f029bb781c68da, type: 3}
+    spawnlocationX: 10
+    spawnlocationY: 6
+  - monsterPrefab: {fileID: -3468036901981203522, guid: 5a6ba398a25fac84b8f029bb781c68da, type: 3}
+    spawnlocationX: 10
+    spawnlocationY: 1
+  - monsterPrefab: {fileID: 3586288936935159200, guid: d3c15f37b2f478a4db32f764487bc303, type: 3}
+    spawnlocationX: 11
+    spawnlocationY: 7
+  - monsterPrefab: {fileID: 5695275225106364820, guid: 947ece25d456fff49bdad3b6dbc694a3, type: 3}
+    spawnlocationX: 11
+    spawnlocationY: 6
+  - monsterPrefab: {fileID: 5695275225106364820, guid: 947ece25d456fff49bdad3b6dbc694a3, type: 3}
+    spawnlocationX: 11
+    spawnlocationY: 1
+  - monsterPrefab: {fileID: 3586288936935159200, guid: d3c15f37b2f478a4db32f764487bc303, type: 3}
+    spawnlocationX: 11
+    spawnlocationY: 0
+  - monsterPrefab: {fileID: 3586288936935159200, guid: d3c15f37b2f478a4db32f764487bc303, type: 3}
+    spawnlocationX: 6
+    spawnlocationY: 7
+  - monsterPrefab: {fileID: 3586288936935159200, guid: d3c15f37b2f478a4db32f764487bc303, type: 3}
+    spawnlocationX: 7
+    spawnlocationY: 4
+  - monsterPrefab: {fileID: 3586288936935159200, guid: d3c15f37b2f478a4db32f764487bc303, type: 3}
+    spawnlocationX: 5
+    spawnlocationY: 1
+  - monsterPrefab: {fileID: 3586288936935159200, guid: d3c15f37b2f478a4db32f764487bc303, type: 3}
+    spawnlocationX: 7
+    spawnlocationY: 0

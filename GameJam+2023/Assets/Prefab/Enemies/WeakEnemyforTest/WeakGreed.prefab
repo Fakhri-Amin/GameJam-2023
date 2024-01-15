@@ -414,7 +414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UnitId: Greed
-  <MaxHealth>k__BackingField: 8
+  <MaxHealth>k__BackingField: 20
   <CrashDamage>k__BackingField: 20
   <xSize>k__BackingField: 2
   <ySize>k__BackingField: 2

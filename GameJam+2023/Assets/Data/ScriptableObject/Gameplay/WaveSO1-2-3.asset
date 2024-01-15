@@ -14,8 +14,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnDatas:
   - monsterPrefab: {fileID: 7439471059684788516, guid: 735855f0906d65b46bb4903b0e5f3d8b, type: 3}
-    spawnlocationX: 10
+    spawnlocationX: 11
+    spawnlocationY: 7
+  - monsterPrefab: {fileID: 7439471059684788516, guid: 735855f0906d65b46bb4903b0e5f3d8b, type: 3}
+    spawnlocationX: 11
+    spawnlocationY: 6
+  - monsterPrefab: {fileID: 7439471059684788516, guid: 735855f0906d65b46bb4903b0e5f3d8b, type: 3}
+    spawnlocationX: 11
     spawnlocationY: 4
   - monsterPrefab: {fileID: 7439471059684788516, guid: 735855f0906d65b46bb4903b0e5f3d8b, type: 3}
-    spawnlocationX: 10
-    spawnlocationY: 5
+    spawnlocationX: 11
+    spawnlocationY: 3
+  - monsterPrefab: {fileID: 7439471059684788516, guid: 735855f0906d65b46bb4903b0e5f3d8b, type: 3}
+    spawnlocationX: 11
+    spawnlocationY: 1
+  - monsterPrefab: {fileID: 7439471059684788516, guid: 735855f0906d65b46bb4903b0e5f3d8b, type: 3}
+    spawnlocationX: 11
+    spawnlocationY: 0
+  - monsterPrefab: {fileID: 2436374897207438662, guid: f7f4b367429469f40814aa74431e9737, type: 3}
+    spawnlocationX: 9
+    spawnlocationY: 4
+  - monsterPrefab: {fileID: 2436374897207438662, guid: f7f4b367429469f40814aa74431e9737, type: 3}
+    spawnlocationX: 9
+    spawnlocationY: 3
+  - monsterPrefab: {fileID: 2436374897207438662, guid: f7f4b367429469f40814aa74431e9737, type: 3}
+    spawnlocationX: 5
+    spawnlocationY: 4
+  - monsterPrefab: {fileID: 2436374897207438662, guid: f7f4b367429469f40814aa74431e9737, type: 3}
+    spawnlocationX: 5
+    spawnlocationY: 3
+  - monsterPrefab: {fileID: 2436374897207438662, guid: f7f4b367429469f40814aa74431e9737, type: 3}
+    spawnlocationX: 7
+    spawnlocationY: 6
