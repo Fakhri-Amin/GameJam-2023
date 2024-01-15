@@ -12,6 +12,8 @@ public class EventManager : MonoBehaviour
     public static event CampaignStart onCampaignStartEvent;
     public delegate void CampaignFinish();
     public static event CampaignFinish onCampaignFinishEvent;
+    public delegate void GameFinish();
+    public static event GameFinish onGameFinishEvent;
     public delegate void ChangeGameState(BattleSystem.State newState, BattleSystem.State prevState);
     public static event ChangeGameState onChangeGameStateEvent;
 
@@ -68,6 +70,11 @@ public class EventManager : MonoBehaviour
     public void OnCampaignFinish()
     {
         onCampaignFinishEvent?.Invoke();
+    }
+
+    public void OnGameFinish()
+    {
+        onGameFinishEvent?.Invoke();
     }
 
     public void OnChangeGameState(BattleSystem.State newState, BattleSystem.State prevState)

@@ -7,6 +7,7 @@ public class CampaignManager : MonoBehaviour
     public static CampaignManager instance;
     public List<CampaignScript> campaignPrefab;
     CampaignScript currentCampaign;
+    int campaignNum = 0;
 
     private void Awake()
     {
@@ -18,11 +19,17 @@ public class CampaignManager : MonoBehaviour
         {
             instance = this;
         }
+        EventManager.onCampaignFinishEvent += OnCampaignFinish;
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.onCampaignFinishEvent -= OnCampaignFinish;
     }
 
     private void Start()
     {
-        InstantiateCampaign(0);
+        InstantiateCampaign(campaignNum);
     }
 
     public CampaignScript GetCurrentCampaign()
@@ -45,4 +52,16 @@ public class CampaignManager : MonoBehaviour
         EventManager.instance.OnCampaignStart(campaignNum);
     }
 
+    void OnCampaignFinish()
+    {
+        campaignNum++;
+        if (campaignPrefab.Count > campaignNum)
+        {
+            InstantiateCampaign(campaignNum);
+        }
+        else
+        {
+            EventManager.instance.OnGameFinish();
+        }
+    }
 }

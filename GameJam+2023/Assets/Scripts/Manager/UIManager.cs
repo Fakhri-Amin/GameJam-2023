@@ -24,13 +24,13 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        EventManager.onCampaignFinishEvent += PlayWinCutscene;
+        EventManager.onGameFinishEvent += PlayWinCutscene;
         EventManager.onPlayerDeadEvent += PlayLosePanel;
     }
 
     private void OnDestroy()
     {
-        EventManager.onCampaignFinishEvent -= PlayWinCutscene;
+        EventManager.onGameFinishEvent -= PlayWinCutscene;
         EventManager.onPlayerDeadEvent -= PlayLosePanel;
     }
 
