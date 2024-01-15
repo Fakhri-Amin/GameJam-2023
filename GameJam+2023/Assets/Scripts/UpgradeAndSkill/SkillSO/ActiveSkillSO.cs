@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
-public class ActiveSkillSO : BaseSkillSO
+
+public abstract class ActiveSkillSO : BaseSkillSO
 {
     public Sprite skillSprite;
     public int cooldownDuration;

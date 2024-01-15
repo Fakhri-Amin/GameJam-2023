@@ -13,7 +13,7 @@ public class PlayerAimAndShoot : BasePlayerInput
     public int ExtraBulletCount
     {
         get { return extraBulletCount; }
-        set { extraBulletCount = value; }
+        set { extraBulletCount = value; UIManager.instance.playerStats.UpdateBulletCount(TotalBulletCount); }
     }
     int totalBulletCount;
     public int TotalBulletCount

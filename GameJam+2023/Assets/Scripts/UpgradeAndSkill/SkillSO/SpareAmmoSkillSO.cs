@@ -14,7 +14,9 @@ public class SpareAmmoSkillSO : PassiveSkillSO
     public override void OnSkillUpdateLevel(PlayerManager player, int newLevel)
     {
         base.OnSkillUpdateLevel(player, newLevel);
+        Debug.Log("OnSkillUpdateLevel" + player.shootController.ExtraBulletCount);
         player.shootController.ExtraBulletCount = extraBullet * newLevel;
+        Debug.Log("OnSkillUpdateLevel" + player.shootController.ExtraBulletCount);
     }
 
     public override void OnSkillEnd(PlayerManager player)

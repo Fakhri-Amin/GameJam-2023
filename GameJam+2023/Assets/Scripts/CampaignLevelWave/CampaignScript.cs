@@ -135,7 +135,7 @@ public class CampaignScript : MonoBehaviour
     {
         if (campaignData.levelDatas.Count > currentLevel + 1)
         {
-            UIManager.instance.upgradePanel.InstantiateUpgradeChoice(campaignData.Get3RandomUpgrade(PlayerManager.instance.upgradeManager));
+            //UIManager.instance.upgradePanel.InstantiateUpgradeChoice(campaignData.Get3RandomUpgrade(PlayerManager.instance.upgradeManager));
             StartNewLevel(currentLevel + 1);
         }
         else
@@ -183,6 +183,7 @@ public class ActiveLevel
         {
             if (IsEmptyUnit())
             {
+                UIManager.instance.upgradePanel.InstantiateUpgradeChoice(campaign.campaignData.Get3RandomUpgrade(PlayerManager.instance.upgradeManager));
                 startNewWave();
             }
         }
@@ -201,6 +202,7 @@ public class ActiveLevel
     {
         if (IsEmptyUnit())
         {
+            UIManager.instance.upgradePanel.InstantiateUpgradeChoice(campaign.campaignData.Get3RandomUpgrade(PlayerManager.instance.upgradeManager));
             startNewWave();
         }
     }

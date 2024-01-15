@@ -46,4 +46,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   campaignPrefab:
   - {fileID: 1624511821715230501, guid: 49835f239eb2bf548b23eac9c79ea8b6, type: 3}
-  - {fileID: 1624511821715230501, guid: d78a02f2dcbe5c447833d0d3bc2e634d, type: 3}

@@ -413,7 +413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectRotation: {fileID: 3542166731565323298}
-  bulletCount: 8
+  bulletCount: 2
   timeBetweenShot: 0.08
   layermask:
     serializedVersion: 2

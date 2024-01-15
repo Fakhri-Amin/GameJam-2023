@@ -16,6 +16,7 @@ public class CampaignSO : ScriptableObject
             UpgradePartScript alreadyOwnedPart = null;
             foreach (var currentUpgrade in currentUpgradePart)
             {
+                Debug.Log("currentUpgrade" + ownedUpgradePart.UpgradeName + " " + currentUpgrade.UpgradeName);
                 if (ownedUpgradePart.UpgradeName == currentUpgrade.UpgradeName)
                 {
                     alreadyOwnedPart = currentUpgrade;

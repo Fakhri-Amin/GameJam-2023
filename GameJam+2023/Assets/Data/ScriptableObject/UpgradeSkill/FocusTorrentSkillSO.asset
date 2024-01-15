@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c974c12145061a9488f126993aa698fc, type: 3}
   m_Name: FocusTorrentSkillSO
   m_EditorClassIdentifier: 
-  SkillName: FocusTorrent
+  SkillName: FocusTorrentSkillSO
   skillSprite: {fileID: 21300000, guid: d676beda423bced4aac05f9e575f529b, type: 3}
-  cooldownDuration: 3
+  cooldownDuration: 2
   manaCost: 20
   waterAttackPrefab: {fileID: 5439387716044564560, guid: cd4a47511e7c5c343bf40015786062a0, type: 3}
-  baseDamage: 2
-  levelDamage: 2
+  baseDamage: 3
+  levelDamage: 3
